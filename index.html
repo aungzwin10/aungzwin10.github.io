@@ -51,7 +51,7 @@
   "worksFor": { "@type": "Organization", "name": "Anzer IT Healthcare Asia" },
   "address": { "@type": "PostalAddress", "addressLocality": "Mandalay", "addressCountry": "MM" },
   "url": "https://aungzwin10.github.io/",
-  "sameAs": ["https://www.linkedin.com/in/aungzwin10/"],
+  "sameAs": ["https://www.linkedin.com/in/aungzwin10/", "https://github.com/aungzwin10"],
   "image": "https://aungzwin10.github.io/assets/img/headshot.webp",
   "knowsLanguage": ["en", "my"],
   "description": "Application Development Manager running eleven enterprise products in parallel, deployed in over 40 hospitals across Myanmar, Cambodia, India, Pakistan and the Philippines.",
@@ -78,7 +78,9 @@
     <path fill="#FFF" d="M396.6,183.8l16.2-28c10-17.5,32.3-23.4,49.8-13.4s23.4,32.3,13.4,49.8L319.9,462.4h112.9c36.6,0,57.1,43,41.2,72.8H143c-20.2,0-36.4-16.2-36.4-36.4c0-20.2,16.2-36.4,36.4-36.4h92.8l118.8-205.9l-37.1-64.4c-10-17.5-4.1-39.6,13.4-49.8c17.5-10,39.6-4.1,49.8,13.4L396.6,183.8L396.6,183.8z M256.2,572.7l-35,60.7c-10,17.5-32.3,23.4-49.8,13.4S148,614.5,158,597l26-45C213.4,542.9,237.3,549.9,256.2,572.7L256.2,572.7z M557.6,462.6h94.7c20.2,0,36.4,16.2,36.4,36.4c0,20.2-16.2,36.4-36.4,36.4h-52.6l35.5,61.6c10,17.5,4.1,39.6-13.4,49.8c-17.5,10-39.6,4.1-49.8-13.4c-59.8-103.7-104.7-181.3-134.5-233c-30.5-52.6-8.7-105.4,12.8-123.3C474.2,318.1,509.9,380,557.6,462.6L557.6,462.6z"/>
   </symbol>
   <!-- official Google Play mark -->
-  <symbol id="i-play" viewBox="0 0 466 511.98">
+  <!-- padded to a square viewBox so it optically matches the App Store tile
+       at the same rendered size instead of shrinking to fit -->
+  <symbol id="i-play" viewBox="-23 -20 512 552">
     <path fill="#EA4335" d="M199.9 237.8l-198.5 232.37c7.22,24.57 30.16,41.81 55.8,41.81 11.16,0 20.93,-2.79 29.3,-8.37l0 0 244.16 -139.46 -130.76 -126.35z"/>
     <path fill="#FBBC04" d="M433.91 205.1l0 0 -104.65 -60 -111.61 110.22 113.01 108.83 104.64 -58.6c18.14,-9.77 30.7,-29.3 30.7,-50.23 -1.4,-20.93 -13.95,-40.46 -32.09,-50.22z"/>
     <path fill="#34A853" d="M199.42 273.45l129.85 -128.35 -241.37 -136.73c-8.37,-5.58 -19.54,-8.37 -30.7,-8.37 -26.5,0 -50.22,18.14 -55.8,41.86 0,0 0,0 0,0l198.02 231.59z"/>
@@ -256,109 +258,64 @@
         <div class="feature-row">
           <div>
             <div class="proj-head">
-              <h3>Hospital E-book</h3>
+              <h3>Patient Portal</h3>
               <span class="proj-no">01 / 08</span>
             </div>
-            <p class="proj-desc">A mobile electronic health record that lets doctors monitor patient condition at the bedside instead of at a desk. Charts, vitals, medication safety and clinical notes in the palm — the flagship of the suite, and the one I wrote the API for from scratch. Shipping features like Tall Man lettering for look-alike drug names, GCS and pain-scale observations, and HTML assessment forms.</p>
-            <div class="proj-stack">
-              <span class="chip">Spring Boot</span><span class="chip">Flutter</span><span class="chip">MS SQL Server</span><span class="chip">REST API</span>
-            </div>
-            <p class="platforms"><b>Ships on</b><span>iOS</span><span>Android</span><span>Windows</span><span>macOS</span></p>
-            <div class="stores">
-              <a class="store" href="https://apps.apple.com/us/app/hospital-e-book/id1669477146" target="_blank" rel="noopener noreferrer external">
-                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.4 12.7c0-2.3 1.9-3.4 2-3.5-1.1-1.6-2.8-1.8-3.4-1.8-1.4-.1-2.8.9-3.5.9s-1.8-.9-3-.8c-1.5 0-2.9.9-3.7 2.3-1.6 2.7-.4 6.8 1.1 9 .8 1.1 1.6 2.3 2.8 2.2 1.1 0 1.6-.7 2.9-.7s1.7.7 2.9.7 2-1.1 2.7-2.2c.9-1.2 1.2-2.5 1.3-2.5 0 0-2.1-.8-2.1-3.6ZM14.2 5.9c.6-.8 1-1.8.9-2.9-.9 0-2 .6-2.6 1.4-.6.7-1.1 1.7-1 2.7 1 .1 2-.5 2.7-1.2Z"/></svg>
-                App&nbsp;Store <i>iPad · Mac</i>
-              </a>
-              <a class="store" href="https://play.google.com/store/apps/details?id=com.anzer.hospitalebook.live" target="_blank" rel="noopener noreferrer external">
-                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3.6 2.2a1 1 0 0 0-.5.9v17.8a1 1 0 0 0 .5.9l9.4-9.8L3.6 2.2Zm11 7.2 2.9-3-9.6-5.5a1 1 0 0 0-.6-.1l7.3 8.6Zm0 5.2-7.3 8.6a1 1 0 0 0 .6-.1l9.6-5.5-2.9-3Zm5.7-4.4-2.3-1.3-3.1 3.1 3.1 3.1 2.3-1.3a1.7 1.7 0 0 0 0-3.6Z"/></svg>
-                Google&nbsp;Play
-              </a>
-              <a class="store" href="demos/ehr.html">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 3l14 9-14 9V3Z"/></svg>
-                Try the live demo
-              </a>
-            </div>
+            <p class="proj-desc">A secure mobile platform that hands patients their own healthcare: medical records, appointment booking, prescription refills, encrypted messaging with providers, and online billing. The trust surface here is the whole product — one leak and it's over. <strong>One codebase, seven separately branded hospital deployments across two countries</strong>, each on both stores with its own configuration, locale and listing — fourteen releases to keep in step. Every one declares "no data collected" to Apple and Google, and means it.</p>
+            <div class="proj-stack"><span class="chip">Spring Boot</span><span class="chip">Flutter</span><span class="chip">PostgreSQL</span><span class="chip">Secure messaging</span><span class="chip">White-label</span><span class="chip">Release management</span></div>
+            <p class="platforms"><b>Ships on</b><span>iOS</span><span>Android</span></p>
           </div>
-          <div class="device-mini" aria-hidden="true">
-            <svg viewBox="0 0 420 260" role="img">
-              <defs>
-                <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
-                  <stop offset="0" stop-color="#12151b"/><stop offset="1" stop-color="#080a0d"/>
-                </linearGradient>
-                <linearGradient id="g2" x1="0" y1="1" x2="1" y2="0">
-                  <stop offset="0" stop-color="#e3b778" stop-opacity=".9"/><stop offset="1" stop-color="#7ba5f5" stop-opacity=".7"/>
-                </linearGradient>
-              </defs>
-              <rect width="420" height="260" rx="10" fill="url(#g1)"/>
-              <rect x="20" y="20" width="118" height="9" rx="4.5" fill="#e3b778" opacity=".85"/>
-              <rect x="20" y="38" width="72" height="7" rx="3.5" fill="#6d7583" opacity=".7"/>
-              <rect x="20" y="66" width="180" height="1" fill="#21262f"/>
-              <path d="M20 168 L58 140 L96 152 L134 108 L172 124 L210 84 L248 100 L286 72 L324 88 L362 56 L400 70"
-                    fill="none" stroke="url(#g2)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M20 168 L58 140 L96 152 L134 108 L172 124 L210 84 L248 100 L286 72 L324 88 L362 56 L400 70 L400 230 L20 230 Z"
-                    fill="url(#g2)" opacity=".08"/>
-              <g fill="#191d25">
-                <rect x="20" y="196" width="118" height="42" rx="8"/>
-                <rect x="151" y="196" width="118" height="42" rx="8"/>
-                <rect x="282" y="196" width="118" height="42" rx="8"/>
-              </g>
-              <g fill="#e3b778" opacity=".8">
-                <rect x="32" y="208" width="42" height="7" rx="3.5"/>
-                <rect x="163" y="208" width="52" height="7" rx="3.5"/>
-                <rect x="294" y="208" width="34" height="7" rx="3.5"/>
-              </g>
-              <g fill="#6d7583" opacity=".55">
-                <rect x="32" y="222" width="66" height="6" rx="3"/>
-                <rect x="163" y="222" width="58" height="6" rx="3"/>
-                <rect x="294" y="222" width="74" height="6" rx="3"/>
-              </g>
-            </svg>
+
+          <div class="deploys deploys-panel">
+            <p class="deploys-head">Live deployments <span>14 listings</span></p>
+            <div class="deploy">
+              <b>Mandalar Hospital</b><em>Myanmar</em>
+              <a class="store" href="https://play.google.com/store/apps/details?id=com.anzer.patientportal.mandalar" target="_blank" rel="noopener noreferrer external"><svg aria-hidden="true"><use href="#i-play"/></svg> Play</a>
+              <a class="store" href="https://apps.apple.com/us/app/mandalar-hospital/id6471388132" target="_blank" rel="noopener noreferrer external"><svg aria-hidden="true"><use href="#i-apple"/></svg> App&nbsp;Store</a>
+            </div>
+            <div class="deploy">
+              <b>Myat Taw Win</b><em>Myanmar</em>
+              <a class="store" href="https://play.google.com/store/apps/details?id=com.anzer.patientportal.mtw" target="_blank" rel="noopener noreferrer external"><svg aria-hidden="true"><use href="#i-play"/></svg> Play</a>
+              <a class="store" href="https://apps.apple.com/us/app/myat-taw-win/id6477137066" target="_blank" rel="noopener noreferrer external"><svg aria-hidden="true"><use href="#i-apple"/></svg> App&nbsp;Store</a>
+            </div>
+            <div class="deploy">
+              <b>Mingalar</b><em>Myanmar</em>
+              <a class="store" href="https://play.google.com/store/apps/details?id=com.anzer.patientportal.mingalar" target="_blank" rel="noopener noreferrer external"><svg aria-hidden="true"><use href="#i-play"/></svg> Play</a>
+              <a class="store" href="https://apps.apple.com/us/app/mingalar-patient-portal/id6754670876" target="_blank" rel="noopener noreferrer external"><svg aria-hidden="true"><use href="#i-apple"/></svg> App&nbsp;Store</a>
+            </div>
+            <div class="deploy">
+              <b>Myittar Oo Eye</b><em>Myanmar</em>
+              <a class="store" href="https://play.google.com/store/apps/details?id=com.anzer.patientportal.moeh" target="_blank" rel="noopener noreferrer external"><svg aria-hidden="true"><use href="#i-play"/></svg> Play</a>
+              <a class="store" href="https://apps.apple.com/au/app/myittar-oo-eye-hospital/id6755430514" target="_blank" rel="noopener noreferrer external"><svg aria-hidden="true"><use href="#i-apple"/></svg> App&nbsp;Store</a>
+            </div>
+            <div class="deploy">
+              <b>Intercare Hospital</b><em>Cambodia</em>
+              <a class="store" href="https://play.google.com/store/apps/details?id=com.anzer.patientportal.intercare" target="_blank" rel="noopener noreferrer external"><svg aria-hidden="true"><use href="#i-play"/></svg> Play</a>
+              <a class="store" href="https://apps.apple.com/us/app/intercare-hospital/id6742880971" target="_blank" rel="noopener noreferrer external"><svg aria-hidden="true"><use href="#i-apple"/></svg> App&nbsp;Store</a>
+            </div>
+            <div class="deploy">
+              <b>Sakal Hospital</b><em>Cambodia</em>
+              <a class="store" href="https://play.google.com/store/apps/details?id=com.anzer.patientportal.sakal" target="_blank" rel="noopener noreferrer external"><svg aria-hidden="true"><use href="#i-play"/></svg> Play</a>
+              <a class="store" href="https://apps.apple.com/us/app/sakal-hospital/id6775129152" target="_blank" rel="noopener noreferrer external"><svg aria-hidden="true"><use href="#i-apple"/></svg> App&nbsp;Store</a>
+            </div>
+            <div class="deploy">
+              <b>Domrey Hospital</b><em>Cambodia</em>
+              <a class="store" href="https://play.google.com/store/apps/details?id=com.anzer.patientportal.domrey" target="_blank" rel="noopener noreferrer external"><svg aria-hidden="true"><use href="#i-play"/></svg> Play</a>
+              <a class="store" href="https://apps.apple.com/us/app/domrey-hospital/id6758605441" target="_blank" rel="noopener noreferrer external"><svg aria-hidden="true"><use href="#i-apple"/></svg> App&nbsp;Store</a>
+            </div>
           </div>
         </div>
       </article>
 
       <article class="card card-lift rv">
-        <div class="proj-head"><h3>Patient Portal</h3><span class="proj-no">02 / 08</span></div>
-        <p class="proj-desc">A secure mobile platform that hands patients their own healthcare: medical records, appointment booking, prescription refills, encrypted messaging with providers, and online billing. The trust surface here is the whole product — one leak and it's over. <strong>One codebase, seven separately branded hospital deployments across two countries</strong>, each on both stores with its own configuration, locale and listing — fourteen releases to keep in step. Every one declares "no data collected" to Apple and Google, and means it.</p>
-        <div class="proj-stack"><span class="chip">Spring Boot</span><span class="chip">Flutter</span><span class="chip">PostgreSQL</span><span class="chip">Secure messaging</span><span class="chip">White-label</span><span class="chip">Release management</span></div>
-        <p class="platforms"><b>Ships on</b><span>iOS</span><span>Android</span></p>
-
-        <div class="deploys">
-          <div class="deploy">
-            <b>Mandalar Hospital</b><em>Myanmar</em>
-            <a class="store" href="https://play.google.com/store/apps/details?id=com.anzer.patientportal.mandalar" target="_blank" rel="noopener noreferrer external"><svg aria-hidden="true"><use href="#i-play"/></svg> Play</a>
-            <a class="store" href="https://apps.apple.com/us/app/mandalar-hospital/id6471388132" target="_blank" rel="noopener noreferrer external"><svg aria-hidden="true"><use href="#i-apple"/></svg> App&nbsp;Store</a>
-          </div>
-          <div class="deploy">
-            <b>Myat Taw Win</b><em>Myanmar</em>
-            <a class="store" href="https://play.google.com/store/apps/details?id=com.anzer.patientportal.mtw" target="_blank" rel="noopener noreferrer external"><svg aria-hidden="true"><use href="#i-play"/></svg> Play</a>
-            <a class="store" href="https://apps.apple.com/us/app/myat-taw-win/id6477137066" target="_blank" rel="noopener noreferrer external"><svg aria-hidden="true"><use href="#i-apple"/></svg> App&nbsp;Store</a>
-          </div>
-          <div class="deploy">
-            <b>Mingalar</b><em>Myanmar</em>
-            <a class="store" href="https://play.google.com/store/apps/details?id=com.anzer.patientportal.mingalar" target="_blank" rel="noopener noreferrer external"><svg aria-hidden="true"><use href="#i-play"/></svg> Play</a>
-            <a class="store" href="https://apps.apple.com/us/app/mingalar-patient-portal/id6754670876" target="_blank" rel="noopener noreferrer external"><svg aria-hidden="true"><use href="#i-apple"/></svg> App&nbsp;Store</a>
-          </div>
-          <div class="deploy">
-            <b>Myittar Oo Eye</b><em>Myanmar</em>
-            <a class="store" href="https://play.google.com/store/apps/details?id=com.anzer.patientportal.moeh" target="_blank" rel="noopener noreferrer external"><svg aria-hidden="true"><use href="#i-play"/></svg> Play</a>
-            <a class="store" href="https://apps.apple.com/au/app/myittar-oo-eye-hospital/id6755430514" target="_blank" rel="noopener noreferrer external"><svg aria-hidden="true"><use href="#i-apple"/></svg> App&nbsp;Store</a>
-          </div>
-          <div class="deploy">
-            <b>Intercare Hospital</b><em>Cambodia</em>
-            <a class="store" href="https://play.google.com/store/apps/details?id=com.anzer.patientportal.intercare" target="_blank" rel="noopener noreferrer external"><svg aria-hidden="true"><use href="#i-play"/></svg> Play</a>
-            <a class="store" href="https://apps.apple.com/us/app/intercare-hospital/id6742880971" target="_blank" rel="noopener noreferrer external"><svg aria-hidden="true"><use href="#i-apple"/></svg> App&nbsp;Store</a>
-          </div>
-          <div class="deploy">
-            <b>Sakal Hospital</b><em>Cambodia</em>
-            <a class="store" href="https://play.google.com/store/apps/details?id=com.anzer.patientportal.sakal" target="_blank" rel="noopener noreferrer external"><svg aria-hidden="true"><use href="#i-play"/></svg> Play</a>
-            <a class="store" href="https://apps.apple.com/us/app/sakal-hospital/id6775129152" target="_blank" rel="noopener noreferrer external"><svg aria-hidden="true"><use href="#i-apple"/></svg> App&nbsp;Store</a>
-          </div>
-          <div class="deploy">
-            <b>Domrey Hospital</b><em>Cambodia</em>
-            <a class="store" href="https://play.google.com/store/apps/details?id=com.anzer.patientportal.domrey" target="_blank" rel="noopener noreferrer external"><svg aria-hidden="true"><use href="#i-play"/></svg> Play</a>
-            <a class="store" href="https://apps.apple.com/us/app/domrey-hospital/id6758605441" target="_blank" rel="noopener noreferrer external"><svg aria-hidden="true"><use href="#i-apple"/></svg> App&nbsp;Store</a>
-          </div>
+        <div class="proj-head"><h3>Hospital E-book</h3><span class="proj-no">02 / 08</span></div>
+        <p class="proj-desc">A mobile electronic health record that lets doctors monitor patient condition at the bedside instead of at a desk. Charts, vitals, medication safety and clinical notes in the palm — the flagship of the suite, and the one I wrote the API for from scratch. Shipping features like Tall Man lettering for look-alike drug names, GCS and pain-scale observations, and HTML assessment forms.</p>
+        <div class="proj-stack"><span class="chip">Spring Boot</span><span class="chip">Flutter</span><span class="chip">MS SQL Server</span><span class="chip">REST API</span></div>
+        <p class="platforms"><b>Ships on</b><span>iOS</span><span>Android</span><span>Windows</span><span>macOS</span></p>
+        <div class="stores">
+          <a class="store" href="https://apps.apple.com/us/app/hospital-e-book/id1669477146" target="_blank" rel="noopener noreferrer external"><svg aria-hidden="true"><use href="#i-apple"/></svg> App&nbsp;Store <i>iPad · Mac</i></a>
+          <a class="store" href="https://play.google.com/store/apps/details?id=com.anzer.hospitalebook.live" target="_blank" rel="noopener noreferrer external"><svg aria-hidden="true"><use href="#i-play"/></svg> Google&nbsp;Play</a>
+          <a class="store" href="demos/ehr.html"><svg aria-hidden="true"><use href="#i-demo"/></svg> Try the live demo</a>
         </div>
       </article>
 
@@ -440,7 +397,7 @@
     <div class="sec-head rv">
       <span class="eyebrow">Capability</span>
       <h2 class="title">What I actually reach for.</h2>
-      <p class="lede">Filter by layer. The constellation on the right is live — drag it, hover a node.</p>
+      <p class="lede">Five layers, rated 1–5. The radar shows where the weight sits; the list gives every skill behind it. Filter either one.</p>
     </div>
 
     <div class="skills-layout">
@@ -448,8 +405,12 @@
         <div class="skill-filters" id="skillFilters" role="group" aria-label="Filter skills by layer"></div>
         <div class="bars" id="skillBars"></div>
       </div>
-      <div class="constellation rv">
-        <canvas id="constellation" width="800" height="800" role="img" aria-label="Interactive constellation of technical skills, sized by proficiency"></canvas>
+      <div class="radar-wrap rv">
+        <canvas id="radar" width="760" height="620" role="img" aria-label="Radar chart of average proficiency across Backend, Frontend, Data, Platform and Leadership"></canvas>
+        <p class="radar-key">
+          <span>Rings are proficiency 1–5</span>
+          <span>Hover an axis for the skills behind it</span>
+        </p>
       </div>
     </div>
   </div>
@@ -555,7 +516,25 @@
           <span class="fun-tag">Gym</span>
           <h3>Six days a week, before the standups.</h3>
           <p>Lifting is the one part of my day nobody can reschedule. It's also the closest thing I've found to code review for the body — small honest increments, no shortcuts, and the bar tells you immediately if you lied about the reps.</p>
-          <div class="reps" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+          <div class="lifter" aria-hidden="true">
+            <svg viewBox="0 0 200 96" role="img">
+              <g class="lift-rig">
+                <line class="bar" x1="26" y1="30" x2="174" y2="30"/>
+                <g class="plates">
+                  <rect x="30" y="12" width="9" height="36" rx="3"/><rect x="43" y="17" width="7" height="26" rx="3"/>
+                  <rect x="161" y="12" width="9" height="36" rx="3"/><rect x="150" y="17" width="7" height="26" rx="3"/>
+                </g>
+              </g>
+              <g class="lift-body">
+                <circle class="head" cx="100" cy="52" r="9"/>
+                <path class="torso" d="M100 61v20"/>
+                <path class="arms" d="M100 66 76 34M100 66l24-32"/>
+                <path class="legs" d="M100 81l-13 14M100 81l13 14"/>
+              </g>
+              <line class="floor" x1="60" y1="95" x2="140" y2="95"/>
+            </svg>
+            <div class="reps"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+          </div>
         </div>
       </article>
 
@@ -564,23 +543,43 @@
         <span class="fun-tag">Beer</span>
         <h3>Cold one, earned.</h3>
         <p>Preferably after a deploy that went out clean on a Friday.</p>
-        <div class="glass" aria-hidden="true">
-          <svg viewBox="0 0 80 110" role="img">
+        <div class="beer" aria-hidden="true">
+          <svg viewBox="0 0 170 120" role="img">
             <defs>
-              <clipPath id="glassClip"><path d="M14 10h52l-6 88a8 8 0 0 1-8 7H28a8 8 0 0 1-8-7Z"/></clipPath>
-              <linearGradient id="beerFill" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0" stop-color="#f6c453"/><stop offset="1" stop-color="#d08a1e"/>
+              <clipPath id="mugClip"><path d="M22 26h62v72a10 10 0 0 1-10 10H32a10 10 0 0 1-10-10Z"/></clipPath>
+              <clipPath id="mugClip2"><path d="M100 34h50v64a10 10 0 0 1-10 10h-30a10 10 0 0 1-10-10Z"/></clipPath>
+              <linearGradient id="ale" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#ffd166"/><stop offset=".55" stop-color="#f0a92c"/><stop offset="1" stop-color="#c9781a"/>
               </linearGradient>
             </defs>
-            <g clip-path="url(#glassClip)">
-              <rect class="beer-liquid" x="0" y="110" width="80" height="110" fill="url(#beerFill)"/>
-              <g class="foam"><ellipse cx="26" cy="34" rx="15" ry="9"/><ellipse cx="45" cy="30" rx="17" ry="10"/><ellipse cx="60" cy="35" rx="13" ry="8"/></g>
-              <g class="bubbles">
-                <circle cx="30" cy="100" r="3"/><circle cx="46" cy="100" r="2.2"/><circle cx="58" cy="100" r="2.6"/>
-                <circle cx="38" cy="100" r="1.8"/><circle cx="52" cy="100" r="3.1"/>
+
+            <!-- left mug -->
+            <g class="mug mug-a">
+              <g clip-path="url(#mugClip)">
+                <rect class="ale" x="20" y="110" width="66" height="100" fill="url(#ale)"/>
+                <g class="head"><ellipse cx="36" cy="34" rx="16" ry="10"/><ellipse cx="56" cy="30" rx="18" ry="11"/><ellipse cx="72" cy="35" rx="14" ry="9"/></g>
+                <g class="fizz">
+                  <circle cx="36" cy="104" r="3"/><circle cx="52" cy="104" r="2.2"/>
+                  <circle cx="66" cy="104" r="2.7"/><circle cx="44" cy="104" r="1.9"/><circle cx="60" cy="104" r="3.2"/>
+                </g>
               </g>
+              <path class="mug-line" d="M22 26h62v72a10 10 0 0 1-10 10H32a10 10 0 0 1-10-10Z"/>
+              <path class="mug-line" d="M84 44h13a11 11 0 0 1 0 30H84"/>
             </g>
-            <path class="glass-outline" d="M14 10h52l-6 88a8 8 0 0 1-8 7H28a8 8 0 0 1-8-7Z"/>
+
+            <!-- right mug, tilts in for the clink -->
+            <g class="mug mug-b">
+              <g clip-path="url(#mugClip2)">
+                <rect class="ale" x="98" y="110" width="54" height="100" fill="url(#ale)"/>
+                <g class="head"><ellipse cx="112" cy="42" rx="14" ry="9"/><ellipse cx="132" cy="39" rx="15" ry="9"/></g>
+              </g>
+              <path class="mug-line" d="M100 34h50v64a10 10 0 0 1-10 10h-30a10 10 0 0 1-10-10Z"/>
+              <path class="mug-line" d="M150 50h11a10 10 0 0 1 0 26h-11"/>
+            </g>
+
+            <g class="clink">
+              <path d="M92 22l0-9M84 26l-6-6M100 26l6-6"/>
+            </g>
           </svg>
         </div>
       </article>
@@ -590,18 +589,41 @@
         <span class="fun-tag">Motorbike</span>
         <h3>The commute I actually choose.</h3>
         <p>Mandalay is best seen at road level, with the throttle open a little more than strictly necessary.</p>
-        <div class="road" aria-hidden="true">
-          <svg class="bike" viewBox="0 0 120 60" role="img">
-            <g fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round">
-              <circle class="wheel" cx="26" cy="42" r="13"/>
-              <circle class="wheel" cx="94" cy="42" r="13"/>
-              <path d="M26 42l14-20h22l10 20"/>
-              <path d="M40 22h26"/>
-              <path d="M62 22l8-9h11"/>
-              <path d="M72 42h22"/>
+        <div class="ride" aria-hidden="true">
+          <svg viewBox="0 0 300 120" role="img" preserveAspectRatio="xMidYMid meet">
+            <!-- scenery scrolls right-to-left so the bike reads as moving -->
+            <g class="scenery">
+              <path d="M-20 84 L20 58 L58 84 Z M60 84 L104 52 L148 84 Z M150 84 L188 62 L226 84 Z M228 84 L268 56 L308 84 Z"/>
             </g>
+            <g class="poles">
+              <path d="M40 84V56M120 84V56M200 84V56M280 84V56"/>
+            </g>
+
+            <g class="rider">
+              <!-- speed streaks -->
+              <g class="streaks"><path d="M28 52h22M18 62h30M34 72h18"/></g>
+              <!-- bike -->
+              <g class="frame">
+                <circle class="w" cx="78" cy="88" r="15"/>
+                <circle class="w" cx="160" cy="88" r="15"/>
+                <path d="M78 88l20-24h30l14 24"/>
+                <path d="M98 64h34"/>
+                <path d="M132 64l12-13h14"/>
+                <path d="M142 88h18"/>
+                <path class="seat" d="M96 62h20"/>
+              </g>
+              <!-- rider -->
+              <g class="body">
+                <circle class="helmet" cx="120" cy="34" r="11"/>
+                <path d="M120 45l-6 18h18"/>
+                <path d="M118 50l24 2"/>
+                <path d="M114 63l-8 16"/>
+              </g>
+            </g>
+
+            <line class="tarmac" x1="0" y1="104" x2="300" y2="104"/>
+            <g class="dashes"><path d="M0 104h30M50 104h30M100 104h30M150 104h30M200 104h30M250 104h30M300 104h30"/></g>
           </svg>
-          <span class="road-line"></span>
         </div>
       </article>
 
@@ -610,14 +632,61 @@
         <span class="fun-tag">Outdoors</span>
         <h3>Away from the screen entirely.</h3>
         <p>Rivers, hills, anywhere without a notification badge. Eight years of remote work makes going outside non-negotiable.</p>
-        <div class="hills" aria-hidden="true">
-          <svg viewBox="0 0 240 90" role="img" preserveAspectRatio="none">
-            <circle class="sun" cx="196" cy="26" r="12"/>
-            <path class="hill hill-3" d="M0 90 L52 34 L104 90 Z"/>
-            <path class="hill hill-2" d="M46 90 L112 22 L178 90 Z"/>
-            <path class="hill hill-1" d="M120 90 L182 44 L240 90 Z"/>
-            <g class="birds" stroke="currentColor" fill="none" stroke-width="1.6" stroke-linecap="round">
-              <path d="M28 26q4-4 8 0"/><path d="M40 20q4-4 8 0"/>
+        <div class="camp" aria-hidden="true">
+          <svg viewBox="0 0 300 150" role="img" preserveAspectRatio="xMidYMax slice">
+            <defs>
+              <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+                <stop class="sky-a" offset="0"/><stop class="sky-b" offset="1"/>
+              </linearGradient>
+              <linearGradient id="river" x1="0" y1="0" x2="0" y2="1">
+                <stop class="riv-a" offset="0"/><stop class="riv-b" offset="1"/>
+              </linearGradient>
+            </defs>
+            <rect class="sky" width="300" height="150" fill="url(#sky)"/>
+
+            <!-- stars, dark theme only -->
+            <g class="stars">
+              <circle cx="34" cy="24" r="1.2"/><circle cx="72" cy="14" r="1"/><circle cx="112" cy="30" r="1.3"/>
+              <circle cx="196" cy="18" r="1"/><circle cx="236" cy="34" r="1.2"/><circle cx="268" cy="16" r="1"/>
+              <circle cx="150" cy="12" r="1"/><circle cx="18" cy="46" r="1"/>
+            </g>
+
+            <!-- sun in light, moon in dark: same slot, swapped by theme -->
+            <g class="daystar">
+              <circle class="sun" cx="238" cy="38" r="15"/>
+              <g class="moon"><circle cx="238" cy="38" r="14"/><circle class="moon-cut" cx="231" cy="33" r="13"/></g>
+            </g>
+
+            <!-- mountains -->
+            <path class="mtn mtn-far"  d="M-10 96 L44 40 L92 96 Z M78 96 L140 30 L202 96 Z M186 96 L246 48 L310 96 Z"/>
+            <path class="snow" d="M44 40 L33 51 L40 53 L48 49 L56 53 Z M140 30 L127 44 L136 46 L145 42 L154 46 Z"/>
+            <path class="mtn mtn-near" d="M-10 108 L60 62 L128 108 Z M110 108 L184 58 L258 108 Z M232 108 L300 70 L330 108 Z"/>
+
+            <!-- trees -->
+            <g class="trees">
+              <path d="M36 108l7-16 7 16Z M36 100l7-15 7 15Z"/>
+              <path d="M262 108l8-18 8 18Z M262 99l8-17 8 17Z"/>
+            </g>
+
+            <!-- river -->
+            <path class="water" d="M0 108h300v42H0Z" fill="url(#river)"/>
+            <g class="ripples">
+              <path d="M18 120q10-4 20 0t20 0"/><path d="M120 128q10-4 20 0t20 0"/><path d="M212 118q10-4 20 0t20 0"/>
+              <path d="M62 136q10-4 20 0t20 0"/><path d="M170 140q10-4 20 0t20 0"/>
+            </g>
+
+            <!-- bank, tent, fire -->
+            <path class="bank" d="M0 112h300v6H0Z"/>
+            <g class="tent">
+              <path class="tent-body" d="M86 112 L104 78 L122 112 Z"/>
+              <path class="tent-door" d="M104 78 L104 112 L96 112 Z"/>
+              <path class="tent-pole" d="M104 74v6"/>
+            </g>
+            <g class="fire">
+              <path class="logs" d="M142 111l16-5M142 106l16 5"/>
+              <path class="flame flame-o" d="M150 104c-7-5-4-12 0-16 1 5 5 5 5 10 0 4-2 6-5 6Z"/>
+              <path class="flame flame-i" d="M150 104c-4-3-2-7 0-9 .6 3 2.6 3 2.6 5.4 0 2.2-1.2 3.6-2.6 3.6Z"/>
+              <g class="sparks"><circle cx="150" cy="96" r="1.1"/><circle cx="155" cy="92" r=".9"/><circle cx="146" cy="90" r="1"/></g>
             </g>
           </svg>
         </div>
@@ -673,7 +742,7 @@
           </a>
           <a class="cline" id="ghLine" href="#contact" hidden>
             <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.53 2.34 1.09 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02a9.5 9.5 0 0 1 5 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0 0 12 2Z"/></svg>
-            <span><b>GitHub</b><small>Code, experiments, open source</small></span>
+            <span><b>GitHub</b><small>@aungzwin10 — day job lives in a private GitLab</small></span>
             <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
           </a>
           <a class="cline" id="liLine" href="#contact" hidden>
