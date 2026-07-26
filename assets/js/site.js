@@ -31,6 +31,11 @@ const $  = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => [...r.querySelectorAll(s)];
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+/* Opt in to the scroll-reveal styles. Everything below the hero is hidden by
+   `.js .rv` until revealed, so this line is what makes hiding safe: if the
+   module never runs, the class is never set and the page renders in full. */
+document.documentElement.classList.add('js');
+
 /* ══ theme ═══════════════════════════════════════════════════════════ */
 (() => {
   const root = document.documentElement;
@@ -95,6 +100,18 @@ const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
     });
   }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
   items.forEach((el) => io.observe(el));
+
+  // Safety net: browsers throttle IntersectionObserver in background tabs, and
+  // a very tall element can sit below the threshold. Anything already on screen
+  // and still hidden after a beat gets revealed regardless — a missed animation
+  // is fine, an invisible page is not.
+  const sweep = () => items.forEach((el) => {
+    if (el.classList.contains('in')) return;
+    const r = el.getBoundingClientRect();
+    if (r.top < innerHeight && r.bottom > 0) el.classList.add('in');
+  });
+  setTimeout(sweep, 2500);
+  addEventListener('scroll', () => { clearTimeout(sweep.t); sweep.t = setTimeout(sweep, 900); }, { passive: true });
 })();
 
 /* ══ count-up stats ══════════════════════════════════════════════════ */
