@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'none'; form-action 'none'; base-uri 'none'; object-src 'none'">
+<meta name="robots" content="noindex">
+<title>Management Dashboard — interactive demo · Aung Zaw Win</title>
+<meta name="description" content="A working reconstruction of the hospital Management Dashboard: occupancy, admissions, length of stay, revenue by department. Synthetic data only.">
+<link rel="stylesheet" href="../assets/css/demo.css">
+<link rel="stylesheet" href="../assets/css/dashboard.css">
+<script src="../assets/js/dashboard.js" type="module"></script>
+</head>
+<body>
+
+<div class="d-head">
+  <span class="d-title">Management Dashboard</span>
+  <span class="d-sub">Anzer Group · all sites</span>
+  <span class="d-spacer"></span>
+  <div class="seg" id="rangeSeg" role="group" aria-label="Reporting period"></div>
+  <span class="d-badge live" id="clock">—</span>
+</div>
+
+<div class="kpis" id="kpis"></div>
+
+<div class="dash">
+  <section class="panel span2">
+    <div class="panel-h">
+      <h3>Admissions &amp; discharges</h3>
+      <span class="d-spacer"></span>
+      <div class="legend"><span data-k="adm">Admissions</span><span data-k="dis">Discharges</span></div>
+    </div>
+    <div class="panel-b">
+      <canvas id="flowChart" height="230" role="img" aria-label="Admissions and discharges over the selected period"></canvas>
+    </div>
+  </section>
+
+  <section class="panel">
+    <div class="panel-h"><h3>Revenue by department</h3></div>
+    <div class="panel-b donut-wrap">
+      <canvas id="donut" width="200" height="200" role="img" aria-label="Share of revenue by department"></canvas>
+      <ul class="donut-key" id="donutKey"></ul>
+    </div>
+  </section>
+
+  <section class="panel">
+    <div class="panel-h"><h3>Bed occupancy by ward</h3><span class="d-spacer"></span><span class="d-badge" id="occTotal">—</span></div>
+    <div class="panel-b"><ul class="wards" id="wards"></ul></div>
+  </section>
+
+  <section class="panel span2">
+    <div class="panel-h">
+      <h3>Department performance</h3>
+      <span class="d-spacer"></span>
+      <span class="hint">Click a column to sort</span>
+    </div>
+    <div class="panel-b table-wrap">
+      <table class="dept" id="deptTable">
+        <thead><tr>
+          <th scope="col" data-sort="name">Department</th>
+          <th scope="col" data-sort="visits" class="num">Visits</th>
+          <th scope="col" data-sort="los" class="num">Avg LOS</th>
+          <th scope="col" data-sort="wait" class="num">Avg wait</th>
+          <th scope="col" data-sort="rev" class="num">Revenue</th>
+          <th scope="col" data-sort="delta" class="num">vs. prev</th>
+        </tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </section>
+</div>
+
+<p class="synthetic">
+  Every figure on this dashboard is generated in your browser from a fixed seed.
+  It is shaped like the real thing and contains none of it.
+</p>
+
+</body>
+</html>

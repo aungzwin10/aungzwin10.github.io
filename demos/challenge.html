@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'none'; form-action 'none'; base-uri 'none'; object-src 'none'">
+<meta name="robots" content="noindex">
+<title>The Bug Hunt — can you spot it? · Aung Zaw Win</title>
+<meta name="description" content="Eight real production bugs from Java, Spring, SQL and Flutter. Find the broken line before the clock runs out.">
+<link rel="stylesheet" href="../assets/css/demo.css">
+<link rel="stylesheet" href="../assets/css/challenge.css">
+<script src="../assets/js/challenge.js" type="module"></script>
+</head>
+<body>
+
+<div class="d-head">
+  <span class="d-title">The Bug Hunt</span>
+  <span class="d-sub">Eight bugs I have actually had to fix</span>
+  <span class="d-spacer"></span>
+  <span class="d-badge" id="roundBadge">—</span>
+  <span class="d-badge" id="scoreBadge">0 pts</span>
+</div>
+
+<!-- ── intro ─────────────────────────────────────────────────────── -->
+<section class="screen" id="intro">
+  <div class="intro-box">
+    <h2>One line in each snippet is wrong.</h2>
+    <p>Not a syntax error — it compiles, it passes review, and it ships. Then it does something quietly terrible in production. Every one of these is a bug I have met in real code.</p>
+    <ul class="rules">
+      <li><b>Click the line</b> you think is the bug.</li>
+      <li><b>20 seconds</b> per round. Faster answers score more.</li>
+      <li><b>Streaks multiply.</b> Three right in a row is worth a lot more than three right.</li>
+    </ul>
+    <button class="play" id="startBtn" type="button">Start the hunt</button>
+    <p class="tiny">Runs entirely in your browser. Nothing is recorded, nothing is sent.</p>
+  </div>
+</section>
+
+<!-- ── round ─────────────────────────────────────────────────────── -->
+<section class="screen" id="round" hidden>
+  <div class="timer"><i id="timerBar"></i></div>
+
+  <div class="code-panel">
+    <header class="code-h">
+      <span class="lang" id="lang">—</span>
+      <span class="file" id="file">—</span>
+      <span class="d-spacer"></span>
+      <span class="streak" id="streak"></span>
+      <span class="clock" id="clock">20.0s</span>
+    </header>
+    <p class="brief" id="brief">—</p>
+    <ol class="code" id="code"></ol>
+  </div>
+
+  <div class="verdict" id="verdict" hidden>
+    <div class="verdict-h">
+      <span class="mark" id="mark">—</span>
+      <h3 id="verdictTitle">—</h3>
+      <span class="d-spacer"></span>
+      <span class="gained" id="gained"></span>
+    </div>
+    <p id="why">—</p>
+    <div class="fix">
+      <span class="fix-label">The fix</span>
+      <code id="fix">—</code>
+    </div>
+    <button class="play" id="nextBtn" type="button">Next bug →</button>
+  </div>
+</section>
+
+<!-- ── result ────────────────────────────────────────────────────── -->
+<section class="screen" id="result" hidden>
+  <div class="intro-box">
+    <span class="rank" id="rank">—</span>
+    <h2 id="resultTitle">—</h2>
+    <p id="resultLine">—</p>
+    <dl class="tally">
+      <div><dt>Found</dt><dd id="tFound">—</dd></div>
+      <div><dt>Best streak</dt><dd id="tStreak">—</dd></div>
+      <div><dt>Avg time</dt><dd id="tTime">—</dd></div>
+      <div><dt>Score</dt><dd id="tScore">—</dd></div>
+    </dl>
+    <div class="result-actions">
+      <button class="play" id="againBtn" type="button">Play again</button>
+      <a class="play ghost" href="../index.html#contact" target="_top">Hire the person who fixed these</a>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>

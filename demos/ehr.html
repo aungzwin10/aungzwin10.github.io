@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'none'; form-action 'none'; base-uri 'none'; object-src 'none'">
+<meta name="robots" content="noindex">
+<title>Hospital E-book — interactive demo · Aung Zaw Win</title>
+<meta name="description" content="A working reconstruction of the Hospital E-book patient chart: vitals, medication administration, clinical notes and labs. Synthetic data only.">
+<link rel="stylesheet" href="../assets/css/demo.css">
+<link rel="stylesheet" href="../assets/css/ehr.css">
+<script src="../assets/js/ehr.js" type="module"></script>
+</head>
+<body>
+
+<div class="d-head">
+  <span class="d-title">Hospital E-book</span>
+  <span class="d-sub">Patient chart · bedside</span>
+  <span class="d-spacer"></span>
+  <span class="d-badge live">Vitals streaming</span>
+  <span class="d-badge">Synthetic data</span>
+</div>
+
+<div class="ehr">
+  <!-- ── ward list ───────────────────────────────────────────── -->
+  <aside class="ward panel">
+    <div class="panel-h">
+      <h3>Ward 3B · Medical</h3>
+      <span class="d-spacer"></span>
+      <span class="ward-count" id="wardCount">—</span>
+    </div>
+    <ul class="ptlist" id="ptList" role="tablist" aria-label="Patients on this ward"></ul>
+  </aside>
+
+  <!-- ── chart ───────────────────────────────────────────────── -->
+  <section class="chart panel" aria-live="polite">
+    <header class="pt-head">
+      <div class="pt-id">
+        <div class="pt-avatar" id="ptAvatar" aria-hidden="true"></div>
+        <div>
+          <h2 id="ptName">—</h2>
+          <p class="pt-meta" id="ptMeta">—</p>
+        </div>
+      </div>
+      <div class="pt-flags" id="ptFlags"></div>
+    </header>
+
+    <nav class="tabs" role="tablist" aria-label="Chart sections">
+      <button role="tab" aria-selected="true"  data-tab="vitals">Vitals</button>
+      <button role="tab" aria-selected="false" data-tab="meds">Medications <span class="tab-pip" id="medPip"></span></button>
+      <button role="tab" aria-selected="false" data-tab="labs">Labs</button>
+      <button role="tab" aria-selected="false" data-tab="notes">Notes</button>
+    </nav>
+
+    <div class="tab-body">
+      <!-- vitals -->
+      <div class="pane" data-pane="vitals">
+        <div class="vitals" id="vitals"></div>
+        <div class="trend">
+          <div class="trend-h">
+            <h3>Last 12 hours</h3>
+            <div class="seg" id="trendSeg" role="group" aria-label="Vital sign to plot"></div>
+          </div>
+          <canvas id="trendCanvas" height="190" role="img" aria-label="Trend chart of the selected vital sign"></canvas>
+        </div>
+        <div class="news" id="news"></div>
+      </div>
+
+      <!-- meds -->
+      <div class="pane" data-pane="meds" hidden>
+        <div class="med-legend">
+          <span><i class="s-due"></i> Due now</span>
+          <span><i class="s-soon"></i> Upcoming</span>
+          <span><i class="s-done"></i> Administered</span>
+          <span><i class="s-late"></i> Overdue</span>
+        </div>
+        <ul class="meds" id="meds"></ul>
+      </div>
+
+      <!-- labs -->
+      <div class="pane" data-pane="labs" hidden>
+        <table class="labs" id="labs">
+          <caption class="sr">Most recent laboratory results</caption>
+          <thead><tr><th scope="col">Test</th><th scope="col">Result</th><th scope="col">Reference</th><th scope="col">Flag</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+
+      <!-- notes -->
+      <div class="pane" data-pane="notes" hidden>
+        <ol class="notes" id="notes"></ol>
+      </div>
+    </div>
+  </section>
+</div>
+
+<p class="synthetic">
+  Every patient, vital sign, medication and note on this page is randomly generated in your browser.
+  No real record has ever touched it, and nothing is transmitted anywhere.
+</p>
+
+</body>
+</html>
