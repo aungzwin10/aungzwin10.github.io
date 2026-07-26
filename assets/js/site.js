@@ -149,11 +149,12 @@ const ROLES = [
     when: 'Aug 2020 — Present', role: 'Application Development Manager',
     org: 'Anzer IT Healthcare Asia',
     points: [
-      'Own 11 products in parallel — 6 mobile apps and 5 web apps — from roadmap through release.',
-      'Still hands-on: design and build the Spring Boot REST APIs the whole suite depends on.',
+      'Own 11 products in parallel — 6 mobile apps and 5 web apps — end to end.',
+      'Run the full lifecycle personally: requirement gathering and client meetings, planning and estimation, architecture, hands-on development, code review, and release management.',
+      'Still write the Spring Boot REST APIs the whole suite depends on.',
       'Portfolio spans Hospital E-book, Nursing E-book, Patient Portal, Consent Forms, Central Registration, Patient Charges, Anzer Accounting & ERP, Management Dashboard, Accounting Dashboard and the Patient Portal admin panel.',
-      'Products live in 40+ hospitals across Myanmar, Cambodia, India, Pakistan and the Philippines.',
-      'Thirteen live store listings across Apple and Google Play, including seven separately branded hospital deployments of the Patient Portal from a single codebase.',
+      'Products deployed in 40+ hospitals across Myanmar, Cambodia, India, Pakistan and the Philippines.',
+      'Eighteen live store listings across Apple and Google Play, including seven separately branded hospital deployments of the Patient Portal — on both stores — from a single codebase.',
       'The clinical apps ship to four platforms from one Flutter codebase — iOS, Android, Windows and macOS.',
       'Worked fully remote throughout.',
     ],
@@ -240,9 +241,13 @@ const SKILLS = [
   { n: 'Docker',            lv: 4, cat: 'Platform'  },
   { n: 'Linux',             lv: 3, cat: 'Platform'  },
 
-  { n: 'Project management',lv: 4, cat: 'Leadership'},
-  { n: 'Team leadership',   lv: 4, cat: 'Leadership'},
-  { n: 'Clinical domain',   lv: 5, cat: 'Leadership'},
+  { n: 'Project management',  lv: 5, cat: 'Leadership'},
+  { n: 'Requirements analysis', lv: 5, cat: 'Leadership'},
+  { n: 'Client engagement',   lv: 4, cat: 'Leadership'},
+  { n: 'Code review',         lv: 5, cat: 'Leadership'},
+  { n: 'Release management',  lv: 4, cat: 'Leadership'},
+  { n: 'Team leadership',     lv: 4, cat: 'Leadership'},
+  { n: 'Healthcare domain',   lv: 5, cat: 'Leadership'},
 ];
 const CATS = ['All', 'Backend', 'Frontend', 'Data', 'Platform', 'Leadership'];
 const CAT_HUE = { Backend: 38, Frontend: 218, Data: 162, Platform: 280, Leadership: 12 };
