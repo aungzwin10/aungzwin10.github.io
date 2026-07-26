@@ -92,6 +92,16 @@ check('order is Play → App Store → rest', groups.every((g) => {
   return r.every((v, i) => i === 0 || r[i - 1] <= v);
 }), true);
 
+/* The three off-duty scenes must stay the same size: one shared frame class and
+   one shared viewBox, so the cards can't drift apart again. */
+const art = [...d.querySelectorAll('.fun-art')];
+check('off-duty scenes framed alike', art.length, 3);
+check('one shared viewBox',
+  new Set(art.map((a) => a.querySelector('svg')?.getAttribute('viewBox'))).size, 1);
+check('no leftover moon cut-out', d.querySelector('.moon-cut'), null);
+check('daylight has unlit logs', !!d.querySelector('.camp .coldlogs'), true);
+check('beer tap removed', d.querySelector('.beer .tap'), null);
+
 // no literal experience figure anywhere — it must be derived
 check('years are derived, not hard-coded', d.querySelectorAll('[data-yrs]').length >= 4, true);
 check('years filled in', [...d.querySelectorAll('[data-yrs]')].every((e) => /^\d+$/.test(e.textContent)), true);
