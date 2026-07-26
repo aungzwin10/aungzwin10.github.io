@@ -1,0 +1,9 @@
+# dev-only — the site itself ships zero dependencies
+node_modules/
+package-lock.json
+
+.DS_Store
+Thumbs.db
+*.log
+.vscode/
+.idea/

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; form-action 'none'; base-uri 'none'; object-src 'none'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Security &amp; privacy — Aung Zaw Win</title>
+<meta name="description" content="How this site is built and why: zero third-party code, a strict Content Security Policy, no cookies, no analytics, no tracking.">
+<link rel="canonical" href="https://aungzwin10.github.io/security.html">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/css/site.css">
+<script src="assets/js/site.js" type="module"></script>
+</head>
+<body>
+<div class="aurora" aria-hidden="true"><i></i><i></i><i></i></div>
+
+<header class="nav" id="nav">
+  <div class="shell nav-in">
+    <a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true">AZ</span><span>Aung&nbsp;Zaw&nbsp;Win</span></a>
+    <nav class="nav-links" id="navLinks" aria-label="Sections">
+      <a href="index.html#work">Work</a><a href="index.html#playground">Playground</a><a href="index.html#contact">Contact</a>
+    </nav>
+    <div class="nav-tools">
+      <button class="icon-btn" id="themeBtn" type="button" aria-label="Switch colour theme">
+        <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg>
+        <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+      </button>
+      <button class="icon-btn" id="navToggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+      <a class="btn btn-primary btn-sm" href="index.html#contact">Hire me</a>
+    </div>
+    <div class="progress" id="progress" aria-hidden="true"></div>
+  </div>
+</header>
+
+<main>
+<section>
+  <div class="shell">
+    <div class="sec-head">
+      <span class="eyebrow">Security &amp; privacy</span>
+      <h2 class="title">This page exists because you should be able to check.</h2>
+      <p class="lede">I spend my working life on systems where a data leak is a clinical incident, not a PR problem. It would be strange to then hand my own site to a dozen third-party scripts. Here is exactly what this site does and does not do — verifiable from view-source.</p>
+    </div>
+
+    <div class="prose">
+
+      <h2>The short version</h2>
+      <ul class="checklist">
+        <li>No cookies. No analytics. No tracking pixels. No fingerprinting.</li>
+        <li>No third-party code at all — not a single external script, stylesheet or font.</li>
+        <li>A strict Content Security Policy that blocks inline and remote scripts outright.</li>
+        <li>My email address is never in the HTML source, so scrapers find nothing.</li>
+        <li>All demo data is synthetic, generated in your browser, and never leaves it.</li>
+      </ul>
+
+      <h2>Zero third-party dependencies</h2>
+      <p>Every byte this site loads comes from its own origin. There is no CDN, no analytics tag, no webfont request, no embedded video player, no chat widget. That is not minimalism for its own sake — it removes an entire category of risk:</p>
+      <ul>
+        <li><strong>No supply-chain attack surface.</strong> A compromised npm package or a hijacked CDN cannot reach a site that never asks either of them for anything.</li>
+        <li><strong>No silent data leakage.</strong> A font request tells the font host your IP, your page and your user-agent. This site makes no such request; typography uses the fonts already on your device.</li>
+        <li><strong>Nothing to patch.</strong> There is no dependency tree, so there is no CVE to chase at 3am.</li>
+      </ul>
+
+      <h2>Content Security Policy</h2>
+      <p>Every page ships a restrictive CSP. Even if someone found a way to inject markup, the browser would refuse to run it:</p>
+<pre><code>default-src 'self';
+script-src  'self';          &lt;!-- no inline JS, no eval, no remote scripts --&gt;
+style-src   'self';
+img-src     'self' data:;
+connect-src 'self' https://api.web3forms.com;
+form-action 'self' https://api.web3forms.com;
+base-uri    'none';          &lt;!-- blocks &lt;base&gt; hijacking --&gt;
+object-src  'none';          &lt;!-- no Flash/Java/embed --&gt;
+upgrade-insecure-requests</code></pre>
+      <p>There is not one <code>onclick=</code> attribute or inline <code>&lt;script&gt;</code> block anywhere in the source — every behaviour is attached from an external module. That is what lets the policy stay this tight.</p>
+
+      <h3>An honest limitation</h3>
+      <p>GitHub Pages serves static files and does not let me set HTTP response headers, so the policy is delivered in a <code>&lt;meta&gt;</code> tag. That covers everything above, but two header-only protections cannot be expressed this way: <code>frame-ancestors</code> (clickjacking) and <code>Strict-Transport-Security</code>. HSTS is partly covered because <code>github.io</code> is on the browser's preloaded HSTS list. Moving the site behind Cloudflare would close the remaining gap; for a personal portfolio with no authenticated session and nothing to steal, the residual risk is close to nil. I would rather say so than pretend otherwise.</p>
+
+      <h2>What is stored on your device</h2>
+      <p>Exactly one thing: if you use the light/dark toggle, your choice is saved in <code>localStorage</code> under the key <code>theme</code>. That is it. It is not an identifier, it is never read by anything else, and clearing site data removes it. No cookies are set, so there is no consent banner to click through — there is nothing to consent to.</p>
+
+      <h2>The contact form</h2>
+      <ul>
+        <li>Submissions go to <a href="https://web3forms.com" target="_blank" rel="noopener noreferrer external">Web3Forms</a>, which relays them to my inbox. Nothing is stored on this site, because this site has no server.</li>
+        <li>The access key in the page is a public submission key by design — it can only be used to send me mail. There is no secret in the client, because a static site cannot keep one.</li>
+        <li>Spam is filtered with a hidden honeypot field and a minimum time-to-submit, both checked before anything is sent.</li>
+        <li>Input is length-capped and validated before submission.</li>
+        <li>If the form is ever unavailable, it falls back to opening your own mail client — your message still reaches me, and nothing passes through a third party at all.</li>
+      </ul>
+
+      <h2>The interactive demos</h2>
+      <p>The Hospital E-book and Management Dashboard demos are reconstructions, not connections. They contain no real patient data and never have. Every name, vital sign, medication, lab result and revenue figure is generated in your browser from a fixed seed at page load. The demos declare <code>connect-src 'none'</code>, so the browser itself will block them from making a network request even if one were attempted. Nothing you click, type or administer is stored or transmitted.</p>
+
+      <h2>Other measures</h2>
+      <ul>
+        <li>Every external link carries <code>rel="noopener noreferrer"</code>, so no linked page can reach back through <code>window.opener</code>.</li>
+        <li><code>referrer-policy: strict-origin-when-cross-origin</code> — outbound links never leak the full URL you came from.</li>
+        <li>All DOM is built with <code>textContent</code> and <code>createElement</code>. There is no <code>innerHTML</code> in the codebase, which closes off DOM-based XSS structurally rather than by escaping.</li>
+        <li>My email address is assembled at runtime from fragments, so harvesting bots reading the raw HTML find nothing to take. No phone number is published anywhere on this site.</li>
+        <li>A <a href=".well-known/security.txt">security.txt</a> is published under RFC 9116 if you find something worth reporting.</li>
+      </ul>
+
+      <h2>Found a problem?</h2>
+      <p>I would genuinely like to know. Email me — the address is on the <a href="index.html#contact">contact section</a> — and I will credit you here if you would like. There is no bounty, just gratitude and a fast fix.</p>
+
+      <p class="dim mono" data-updated>Last reviewed: July 2026</p>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="shell">
+    <div class="foot-grid">
+      <div>
+        <a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true">AZ</span><span>Aung&nbsp;Zaw&nbsp;Win</span></a>
+        <p class="dim">Healthcare software, built to hold. Mandalay, Myanmar.</p>
+      </div>
+      <nav class="foot-links" aria-label="Footer">
+        <a href="index.html#work">Work</a><a href="index.html#playground">Playground</a>
+        <a href="assets/Aung-Zaw-Win-CV.pdf" download>CV (PDF)</a><a href="index.html#contact">Contact</a>
+      </nav>
+    </div>
+    <div class="foot-note">
+      <span>© <span id="year">2026</span> Aung Zaw Win. All rights reserved.</span>
+      <span class="mono">No cookies · No analytics · No third-party scripts</span>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

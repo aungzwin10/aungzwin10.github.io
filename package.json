@@ -1,0 +1,15 @@
+{
+  "name": "aungzawwin-portfolio",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Portfolio of Aung Zaw Win. Zero runtime dependencies — jsdom is dev-only, for the smoke test.",
+  "type": "module",
+  "scripts": {
+    "test": "node test/news2.test.mjs && node test/smoke.mjs",
+    "serve": "python3 -m http.server 8080"
+  },
+  "devDependencies": {
+    "jsdom": "^24.0.0"
+  },
+  "license": "UNLICENSED"
+}
