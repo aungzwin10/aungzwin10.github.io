@@ -127,10 +127,12 @@ section { padding-block: clamp(5rem, 11vw, 9rem); position: relative; }
 .rule { border-top: 1px solid var(--line-soft); }
 
 /* ---------- type ---------- */
+/* sized so "hospitals run on." holds on one line in the hero column —
+   don't raise the max without re-checking that break */
 .display {
-  font-size: clamp(2.9rem, 8.4vw, 6.4rem);
-  line-height: .95;
-  letter-spacing: -.045em;
+  font-size: clamp(2.6rem, 6.1vw, 4.2rem);
+  line-height: 1.0;
+  letter-spacing: -.042em;
   font-weight: 680;
 }
 h2.title {
@@ -307,7 +309,7 @@ p  { text-wrap: pretty; }
 .hero { padding-block: clamp(3rem, 7vw, 6rem) clamp(4rem, 8vw, 7rem); }
 .hero-grid {
   display: grid; gap: clamp(2.5rem, 5vw, 4.5rem);
-  grid-template-columns: 1.15fr .85fr; align-items: center;
+  grid-template-columns: 1.22fr .78fr; align-items: center;
 }
 .hero h1 { margin: 1.1rem 0 1.5rem; }
 .hero .lede { max-width: 54ch; }
