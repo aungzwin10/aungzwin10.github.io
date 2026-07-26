@@ -729,50 +729,49 @@ p  { text-wrap: pretty; }
 .fun-gym.in .reps i:nth-child(7){animation-delay:.64s} .fun-gym.in .reps i:nth-child(8){animation-delay:.73s;background:var(--gold)}
 @keyframes rep { to { transform: scaleX(1) } }
 
-/* ── beer: tap pours, head rises, frost beads, then a clink ── */
-.beer { margin-top: 1.1rem; display: flex; justify-content: center; }
-.beer svg { width: 100%; max-width: 210px; height: auto; overflow: visible; }
-.beer .tap-body { fill: var(--fg-3); opacity: .55; }
-.beer .tap-arm  { stroke: var(--fg-3); stroke-width: 3.4; stroke-linecap: round; opacity: .55; }
-.beer .pour { fill: #f5b02f; opacity: 0; transform-origin: 50% 0; }
-.fun-beer.in .pour { animation: pour 1.5s var(--ease) .1s forwards; }
-@keyframes pour { 0%{opacity:0;transform:scaleY(0)} 12%{opacity:.9;transform:scaleY(1)} 78%{opacity:.9;transform:scaleY(1)} 100%{opacity:0;transform:scaleY(1)} }
-.mug-line { fill: none; stroke: var(--fg-3); stroke-width: 3.4; stroke-linejoin: round; opacity: .72; }
+/* All three off-duty scenes share one frame: same viewBox (320×170), same box,
+   so the cards line up whatever is drawn inside them. */
+.fun-art {
+  margin-top: 1.15rem; border-radius: var(--r); overflow: hidden;
+  border: 1px solid var(--line-soft);
+  background: linear-gradient(180deg, var(--bg-2), var(--bg-1));
+}
+.fun-art svg { width: 100%; height: 170px; display: block; }
+
+/* ── beer: two mugs fill, frost beads, then a clink ── */
+.beer .mug-line { fill: none; stroke: var(--fg-3); stroke-width: 3.6; stroke-linejoin: round; stroke-linecap: round; opacity: .72; }
 .beer .head ellipse { fill: #fff8e8; opacity: 0; }
 .beer .ale { transform: translateY(0); }
 .fun-beer.in .mug-a .ale { animation: fill 1.4s var(--ease-out) .2s forwards; }
 .fun-beer.in .mug-b .ale { animation: fill 1.4s var(--ease-out) .45s forwards; }
-@keyframes fill { to { transform: translateY(-88px) } }
+@keyframes fill { to { transform: translateY(-96px) } }
 .fun-beer.in .head ellipse { animation: headUp .6s var(--ease-out) 1.5s forwards; }
-@keyframes headUp { from { opacity:0; transform: translateY(8px) scaleY(.6) } to { opacity:.96; transform: none } }
+@keyframes headUp { from { opacity:0; transform: translateY(9px) scaleY(.6) } to { opacity:.96; transform: none } }
 .beer .fizz circle { fill: #fff3d4; opacity: 0; }
 .fun-beer.in .fizz circle { animation: fizz 2.6s linear 1.8s infinite; }
 .fun-beer.in .fizz circle:nth-child(2){animation-delay:2.2s} .fun-beer.in .fizz circle:nth-child(3){animation-delay:2.6s}
 .fun-beer.in .fizz circle:nth-child(4){animation-delay:2s}   .fun-beer.in .fizz circle:nth-child(5){animation-delay:3s}
 .fun-beer.in .fizz circle:nth-child(6){animation-delay:2.4s}
-@keyframes fizz { 0%{opacity:0;transform:translateY(0)} 15%{opacity:.9} 100%{opacity:0;transform:translateY(-66px)} }
-.beer .frost path { stroke: #fff; stroke-width: 2.4; stroke-linecap: round; opacity: 0; }
+@keyframes fizz { 0%{opacity:0;transform:translateY(0)} 15%{opacity:.9} 100%{opacity:0;transform:translateY(-72px)} }
+.beer .frost path { stroke: #fff; stroke-width: 2.6; stroke-linecap: round; opacity: 0; }
 .fun-beer.in .frost path { animation: bead 3.4s ease-in 2.2s infinite; }
 .fun-beer.in .frost path:nth-child(2){animation-delay:2.9s} .fun-beer.in .frost path:nth-child(3){animation-delay:3.6s}
 .fun-beer.in .frost path:nth-child(4){animation-delay:4.2s}
-@keyframes bead { 0%{opacity:0;transform:translateY(-6px)} 25%{opacity:.4} 100%{opacity:0;transform:translateY(16px)} }
+@keyframes bead { 0%{opacity:0;transform:translateY(-6px)} 25%{opacity:.4} 100%{opacity:0;transform:translateY(18px)} }
 .mug { transform-origin: 50% 92%; }
 .fun-beer.in .mug-a { animation: tiltL 4.2s var(--ease) 2.1s infinite; }
 .fun-beer.in .mug-b { animation: tiltR 4.2s var(--ease) 2.1s infinite; }
-@keyframes tiltL { 0%,70%,100%{transform:rotate(0)} 78%{transform:rotate(8deg) translateX(7px)} 86%{transform:rotate(3deg)} }
-@keyframes tiltR { 0%,70%,100%{transform:rotate(0)} 78%{transform:rotate(-8deg) translateX(-7px)} 86%{transform:rotate(-3deg)} }
-.clink { fill: none; stroke: var(--gold); stroke-width: 2.8; stroke-linecap: round; opacity: 0; transform-origin: 103px 38px; }
-.splash circle { fill: #ffe9b0; opacity: 0; }
+@keyframes tiltL { 0%,70%,100%{transform:rotate(0)} 78%{transform:rotate(9deg) translateX(14px)} 86%{transform:rotate(4deg) translateX(4px)} }
+@keyframes tiltR { 0%,70%,100%{transform:rotate(0)} 78%{transform:rotate(-9deg) translateX(-14px)} 86%{transform:rotate(-4deg) translateX(-4px)} }
+.beer .clink { fill: none; stroke: var(--gold); stroke-width: 3; stroke-linecap: round; opacity: 0; transform-origin: 160px 46px; }
+.beer .splash circle { fill: #ffe9b0; opacity: 0; }
 .fun-beer.in .clink { animation: clink 4.2s var(--ease) 2.1s infinite; }
 .fun-beer.in .splash circle { animation: splash 4.2s var(--ease) 2.1s infinite; }
 .fun-beer.in .splash circle:nth-child(2){animation-delay:2.15s} .fun-beer.in .splash circle:nth-child(3){animation-delay:2.2s}
 @keyframes clink  { 0%,76%,100%{opacity:0;transform:scale(.55)} 80%{opacity:1;transform:scale(1)} 88%{opacity:0;transform:scale(1.3)} }
-@keyframes splash { 0%,76%,100%{opacity:0;transform:translateY(0)} 80%{opacity:.9} 90%{opacity:0;transform:translateY(-14px)} }
+@keyframes splash { 0%,76%,100%{opacity:0;transform:translateY(0)} 80%{opacity:.9} 90%{opacity:0;transform:translateY(-16px)} }
 
-/* ── motorbike: layered parallax, leaning rider, exhaust ── */
-.ride { margin-top: 1.1rem; border-radius: var(--r); overflow: hidden; border: 1px solid var(--line-soft);
-        background: linear-gradient(180deg, var(--bg-2), var(--bg-1)); }
-.ride svg { width: 100%; height: 148px; display: block; }
+/* ── motorbike: classic roadster, parallax scenery ── */
 .ride .far { fill: color-mix(in srgb, var(--gold) 13%, var(--bg-3)); }
 .ride .mid { fill: color-mix(in srgb, var(--gold) 22%, var(--bg-3)); }
 .ride .posts { stroke: var(--line); stroke-width: 2.6; fill: none; }
@@ -784,27 +783,38 @@ p  { text-wrap: pretty; }
 .ride .dashes { stroke: var(--gold-dim); stroke-width: 2.8; stroke-linecap: round; fill: none; }
 .fun-ride.in .dashes { animation: dash .5s linear infinite; }
 @keyframes dash { to { transform: translateX(-56px) } }
-.ride .frame { fill: none; stroke: var(--gold); stroke-width: 4.2; stroke-linecap: round; stroke-linejoin: round; }
-.ride .body  { fill: none; stroke: var(--fg-2); stroke-width: 4.6; stroke-linecap: round; stroke-linejoin: round; }
+
+.ride .tyre  { fill: none; stroke: var(--fg-2); stroke-width: 5; }
+.ride .rim   { fill: none; stroke: var(--gold); stroke-width: 2.6; }
+.ride .spokes{ stroke: var(--gold-dim); stroke-width: 1.6; fill: none; }
+.ride .hub   { fill: var(--gold); }
+.ride .frame, .ride .fork, .ride .bars, .ride .pipe, .ride .guard {
+  fill: none; stroke: var(--gold); stroke-width: 4; stroke-linecap: round; stroke-linejoin: round;
+}
+.ride .pipe  { stroke: var(--fg-3); stroke-width: 5; }
+.ride .guard { stroke: var(--gold-dim); stroke-width: 3.4; }
+.ride .tank  { fill: var(--gold); }
+.ride .seat  { fill: var(--fg-2); }
+.ride .engine{ fill: var(--gold-dim); }
+.ride .lamp  { fill: #fff3d0; stroke: var(--gold); stroke-width: 2.4; }
+.ride .beam  { stroke: var(--gold-2); stroke-width: 2.2; stroke-linecap: round; fill: none; opacity: .55; }
+.ride .body  { fill: none; stroke: var(--fg-2); stroke-width: 6; stroke-linecap: round; stroke-linejoin: round; }
 .ride .helmet{ fill: var(--fg-2); stroke: none; }
-.ride .visor { stroke: var(--gold-2); stroke-width: 3; fill: none; }
-.ride .seat  { stroke-width: 5.4; }
+.ride .visor { fill: var(--gold-2); stroke: none; }
 .ride .streaks { stroke: var(--gold-dim); stroke-width: 2.6; stroke-linecap: round; fill: none; opacity: 0; }
 .fun-ride.in .streaks { animation: streak .45s linear infinite; }
 @keyframes streak { 0%{opacity:.8;transform:translateX(12px)} 100%{opacity:0;transform:translateX(-30px)} }
 .ride .exhaust circle { fill: var(--fg-3); opacity: 0; }
 .fun-ride.in .exhaust circle { animation: puff 1.4s ease-out infinite; }
 .fun-ride.in .exhaust circle:nth-child(2){animation-delay:.22s} .fun-ride.in .exhaust circle:nth-child(3){animation-delay:.44s}
-@keyframes puff { 0%{opacity:.32;transform:translate(0,0) scale(.5)} 100%{opacity:0;transform:translate(-30px,-12px) scale(1.5)} }
-.rider { transform-origin: 140px 104px; }
+@keyframes puff { 0%{opacity:.32;transform:translate(0,0) scale(.5)} 100%{opacity:0;transform:translate(-32px,-14px) scale(1.5)} }
+.ride .rider { transform-origin: 168px 128px; }
 .fun-ride.in .rider { animation: lean 2.6s var(--ease) infinite; }
-@keyframes lean { 0%,100%{transform:translateY(0) rotate(-1.5deg)} 35%{transform:translateY(-4px) rotate(1.5deg)} 70%{transform:translateY(-1px) rotate(-.5deg)} }
-.fun-ride.in .w { transform-box: fill-box; transform-origin: center; animation: spin .34s linear infinite; }
+@keyframes lean { 0%,100%{transform:translateY(0) rotate(-1.2deg)} 35%{transform:translateY(-4px) rotate(1.2deg)} 70%{transform:translateY(-1px) rotate(-.4deg)} }
+.fun-ride.in .wheel .spokes { transform-box: fill-box; transform-origin: center; animation: spin .34s linear infinite; }
 @keyframes spin { to { transform: rotate(360deg) } }
 
-/* ── outdoors: mountains, river, tent, campfire; sun by day, moon by night ── */
-.camp { margin-top: 1.1rem; border-radius: var(--r); overflow: hidden; border: 1px solid var(--line-soft); }
-.camp svg { width: 100%; height: 186px; display: block; }
+/* ── outdoors: mountains, river, tent; sun + birds by day, moon + fire by night ── */
 .sky-a { stop-color: #0b1322; } .sky-b { stop-color: #1c2740; }
 .riv-a { stop-color: #14304c; } .riv-b { stop-color: #0a1522; }
 :root[data-theme="light"] .sky-a { stop-color: #a9d6f2; } :root[data-theme="light"] .sky-b { stop-color: #eef6fc; }
@@ -817,23 +827,30 @@ p  { text-wrap: pretty; }
 .camp .shooting path { stroke: #fff; stroke-width: 1.6; stroke-linecap: round; fill: none; opacity: 0; }
 .fun-outdoor.in .shooting path { animation: shoot 11s linear 3s infinite; }
 @keyframes shoot { 0%{opacity:0;transform:translate(40px,10px)} 3%{opacity:.9} 9%{opacity:0;transform:translate(200px,60px)} 100%{opacity:0;transform:translate(200px,60px)} }
-:root[data-theme="light"] .camp .stars,
-:root[data-theme="light"] .camp .shooting { display: none; }
 
-.camp .sun, .camp .sun-halo { display: none; }
+/* night: moon + stars + a lit fire. day: sun + birds, cold logs. */
+.camp .sun, .camp .sun-halo, .camp .birds, .camp .coldlogs { display: none; }
 .camp .sun { fill: #ffd45e; } .camp .sun-halo { fill: #ffd45e; opacity: .16; }
-.camp .moon { fill: #eef3fb; } .camp .moon-cut { fill: #1c2740; }
+.camp .moon { fill: #eef3fb; }
+:root[data-theme="light"] .camp .moon,
+:root[data-theme="light"] .camp .stars,
+:root[data-theme="light"] .camp .shooting,
+:root[data-theme="light"] .camp .fire { display: none; }
 :root[data-theme="light"] .camp .sun,
-:root[data-theme="light"] .camp .sun-halo { display: block; }
-:root[data-theme="light"] .camp .moon { display: none; }
+:root[data-theme="light"] .camp .sun-halo,
+:root[data-theme="light"] .camp .birds,
+:root[data-theme="light"] .camp .coldlogs { display: block; }
+.camp .coldlogs path { stroke: #6b4a2a; stroke-width: 3.6; stroke-linecap: round; fill: none; }
+.camp .stones { stroke: var(--fg-3); stroke-width: 3; stroke-linecap: round; opacity: .5; }
+
 .fun-outdoor.in .daystar { animation: hang 8s ease-in-out infinite alternate; }
 @keyframes hang { from { transform: translateY(5px) } to { transform: translateY(-6px) } }
 .fun-outdoor.in .sun-halo { animation: halo 4s ease-in-out infinite alternate; }
 @keyframes halo { from { transform: scale(1); opacity: .12 } to { transform: scale(1.16); opacity: .24 } }
 
-.camp .birds path { stroke: var(--fg-3); stroke-width: 1.7; fill: none; stroke-linecap: round; }
+.camp .birds path { stroke: #46586e; stroke-width: 1.9; fill: none; stroke-linecap: round; }
 .fun-outdoor.in .birds { animation: glide 14s linear infinite; }
-@keyframes glide { 0%{opacity:0;transform:translate(-40px,8px)} 12%{opacity:.6} 85%{opacity:.6} 100%{opacity:0;transform:translate(240px,-16px)} }
+@keyframes glide { 0%{opacity:0;transform:translate(-40px,8px)} 12%{opacity:.75} 85%{opacity:.75} 100%{opacity:0;transform:translate(240px,-16px)} }
 
 .camp .mtn-far { fill: #29334a; } .camp .mtn-near { fill: #1a2331; }
 .camp .snow { fill: #e9f0f8; opacity: .92; }
@@ -869,7 +886,6 @@ p  { text-wrap: pretty; }
 @keyframes spark { 0%{opacity:0;transform:translateY(0) translateX(0)} 18%{opacity:.95} 100%{opacity:0;transform:translateY(-32px) translateX(7px)} }
 .fun-outdoor.in .glow { animation: glowPulse 1.5s ease-in-out infinite alternate; }
 @keyframes glowPulse { from { opacity: .7 } to { opacity: 1 } }
-:root[data-theme="light"] .camp .glow { opacity: .35; }
 
 @media (max-width: 940px) {
   .fun-grid { grid-template-columns: 1fr 1fr; }
