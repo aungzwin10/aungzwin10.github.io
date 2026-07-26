@@ -690,22 +690,6 @@ p  { text-wrap: pretty; }
 .fun h3 { font-size: 1.14rem; letter-spacing: -.026em; margin-bottom: .55rem; }
 .fun p { font-size: .89rem; color: var(--fg-2); line-height: 1.62; max-width: 52ch; }
 
-/* gym — two photos side by side, fanned out; they spread further on hover.
-   Each is 62% of the frame so both stay readable instead of one hiding
-   behind the other. */
-.fun-photos { position: relative; width: clamp(240px, 28vw, 340px); aspect-ratio: 5/4.6; flex: none; }
-.fp {
-  position: absolute; top: 0; bottom: 0; width: 62%; margin: 0;
-  border-radius: var(--r); overflow: hidden;
-  border: 1px solid var(--line); box-shadow: var(--shadow-2);
-  transition: transform .6s var(--ease-out), z-index 0s;
-}
-.fp img { width: 100%; height: 100%; object-fit: cover; }
-.fp-1 { left: 0;  transform: rotate(-6deg); z-index: 1; }
-.fp-2 { right: 0; transform: rotate(5deg);  z-index: 2; }
-.fun-gym:hover .fp-1 { transform: rotate(-9deg) translateX(-7%) scale(1.03); }
-.fun-gym:hover .fp-2 { transform: rotate(8deg)  translateX(7%)  scale(1.03); }
-
 /* ── gym: two photos side by side, plus a lifter doing presses ── */
 .fun-photos {
   display: grid; grid-template-columns: 1fr 1fr; gap: .7rem;
