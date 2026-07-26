@@ -14,10 +14,7 @@
    ------------------------------------------------------------------------ */
 const CONFIG = {
   formAccessKey: '',
-  // Deliberately blank: all my work lives in my employer's self-hosted GitLab,
-  // so a link here would send people to an empty profile. The work section says
-  // so plainly instead. Fill this in if the profile ever has something on it.
-  github:        '',
+  github:        'https://github.com/aungzwin10',
   linkedin:      'https://www.linkedin.com/in/aungzwin10/',
 };
 
@@ -305,24 +302,30 @@ const LABEL = { 1: 'Fundamental', 2: 'Novice', 3: 'Intermediate', 4: 'Advanced',
   });
 })();
 
-/* ── constellation ── */
+/* ── capability radar ──
+   Replaces an earlier free-floating constellation that looked good and
+   communicated nothing. Five labelled axes, rings at 1–5, one filled polygon:
+   readable in about a second, which is all the attention this gets. */
 (() => {
-  const cv = $('#constellation');
+  const cv = $('#radar');
   if (!cv) return;
-  const ctx = cv.getContext('2d', { alpha: true });
-  let W = 0, H = 0, dpr = 1;
+  const ctx = cv.getContext('2d');
 
-  const nodes = SKILLS.map((s, i) => {
-    const ring = 5 - s.lv;                                  // stronger skills sit nearer the centre
-    const a = (i / SKILLS.length) * Math.PI * 2 + ring * 0.7;
-    return { ...s, a, ring, r: 0.16 + ring * 0.115, x: 0, y: 0, rad: 3 + s.lv * 2.1, on: 0 };
-  });
+  const AXES = ['Backend', 'Frontend', 'Data', 'Platform', 'Leadership'];
+  const avg = (c) => {
+    const s = SKILLS.filter((x) => x.cat === c);
+    return s.reduce((a, b) => a + b.lv, 0) / s.length;
+  };
+  const VALUES = AXES.map(avg);
+  const TOP = AXES.map((c) =>
+    SKILLS.filter((x) => x.cat === c).sort((a, b) => b.lv - a.lv).slice(0, 3).map((x) => x.n));
 
-  let spin = 0, drag = null, vel = 0.00035, hovered = null, active = 'All';
+  let W = 0, H = 0, hover = -1, grow = 0, active = 'All';
+  const css = (v) => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
 
   const resize = () => {
     const box = cv.getBoundingClientRect();
-    dpr = Math.min(devicePixelRatio || 1, 2);
+    const dpr = Math.min(devicePixelRatio || 1, 2);
     W = box.width; H = box.height;
     cv.width = W * dpr; cv.height = H * dpr;
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
@@ -330,99 +333,127 @@ const LABEL = { 1: 'Fundamental', 2: 'Novice', 3: 'Intermediate', 4: 'Advanced',
   new ResizeObserver(resize).observe(cv);
   resize();
 
-  const css = (v) => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
-  let ink = css('--line'), fg = css('--fg'), fg3 = css('--fg-3');
-  addEventListener('themechange', () => { ink = css('--line'); fg = css('--fg'); fg3 = css('--fg-3'); });
+  addEventListener('skillfilter', (e) => { active = e.detail; draw(); });
 
-  addEventListener('skillfilter', (e) => { active = e.detail; });
-
-  const place = (n) => {
-    const R = Math.min(W, H) / 2;
-    n.x = W / 2 + Math.cos(n.a + spin) * n.r * R * 1.72;
-    n.y = H / 2 + Math.sin(n.a + spin) * n.r * R * 1.72;
+  const geom = () => {
+    const cx = W / 2, cy = H / 2 + 6;
+    const R = Math.min(W, H) * 0.34;
+    const pt = (i, r) => {
+      const a = -Math.PI / 2 + (i / AXES.length) * Math.PI * 2;
+      return [cx + Math.cos(a) * R * r, cy + Math.sin(a) * R * r];
+    };
+    return { cx, cy, R, pt };
   };
 
-  cv.addEventListener('pointermove', (e) => {
-    const b = cv.getBoundingClientRect(), mx = e.clientX - b.left, my = e.clientY - b.top;
-    if (drag !== null) { vel = 0; spin += (mx - drag) * 0.005; drag = mx; }
-    hovered = nodes.find((n) => Math.hypot(n.x - mx, n.y - my) < n.rad + 13) || null;
-    cv.style.cursor = hovered ? 'pointer' : (drag !== null ? 'grabbing' : 'grab');
-  });
-  cv.addEventListener('pointerdown', (e) => {
-    drag = e.clientX - cv.getBoundingClientRect().left;
-    cv.setPointerCapture(e.pointerId);
-  });
-  const release = () => { if (drag !== null) { drag = null; vel = 0.00035; } };
-  cv.addEventListener('pointerup', release);
-  cv.addEventListener('pointercancel', release);
-  cv.addEventListener('pointerleave', () => { release(); hovered = null; });
-
-  const frame = () => {
-    spin += vel;
+  function draw() {
+    const { cx, cy, R, pt } = geom();
     ctx.clearRect(0, 0, W, H);
-    nodes.forEach(place);
+    const line = css('--line'), soft = css('--line-soft');
+    const gold = css('--gold'), gold2 = css('--gold-2'), fg = css('--fg'), fg3 = css('--fg-3');
 
-    // links between same-category neighbours
-    ctx.lineWidth = 1;
-    for (let i = 0; i < nodes.length; i++) {
-      for (let j = i + 1; j < nodes.length; j++) {
-        const a = nodes[i], b = nodes[j];
-        if (a.cat !== b.cat) continue;
-        const d = Math.hypot(a.x - b.x, a.y - b.y);
-        if (d > Math.min(W, H) * 0.42) continue;
-        const dim = active !== 'All' && a.cat !== active ? 0.16 : 1;
-        ctx.strokeStyle = `hsl(${CAT_HUE[a.cat]} 55% 60% / ${(0.20 * dim * (1 - d / (Math.min(W, H) * 0.42))).toFixed(3)})`;
-        ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
+    // rings
+    for (let ring = 1; ring <= 5; ring++) {
+      ctx.beginPath();
+      for (let i = 0; i <= AXES.length; i++) {
+        const [x, y] = pt(i % AXES.length, ring / 5);
+        i ? ctx.lineTo(x, y) : ctx.moveTo(x, y);
       }
+      ctx.strokeStyle = ring === 5 ? line : soft;
+      ctx.lineWidth = 1; ctx.stroke();
     }
+    // ring numbers
+    ctx.font = '10px ui-monospace, Menlo, monospace';
+    ctx.fillStyle = fg3; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    for (let ring = 1; ring <= 5; ring++) ctx.fillText(ring, cx, cy - (R * ring) / 5);
 
-    // centre mark
-    ctx.strokeStyle = ink; ctx.lineWidth = 1;
-    ctx.beginPath(); ctx.arc(W / 2, H / 2, Math.min(W, H) * 0.055, 0, 7); ctx.stroke();
-
-    nodes.forEach((n) => {
-      const focus = hovered === n;
-      n.on += ((focus ? 1 : 0) - n.on) * 0.18;
-      const dim = active !== 'All' && n.cat !== active ? 0.18 : 1;
-      const hue = CAT_HUE[n.cat];
-      const rad = n.rad * (1 + n.on * 0.45);
-
-      const g = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, rad * 4.5);
-      g.addColorStop(0, `hsl(${hue} 70% 62% / ${(0.32 * dim).toFixed(3)})`);
-      g.addColorStop(1, 'transparent');
-      ctx.fillStyle = g;
-      ctx.beginPath(); ctx.arc(n.x, n.y, rad * 4.5, 0, 7); ctx.fill();
-
-      ctx.fillStyle = `hsl(${hue} 72% ${58 + n.on * 18}% / ${dim})`;
-      ctx.beginPath(); ctx.arc(n.x, n.y, rad, 0, 7); ctx.fill();
-
-      if (n.on > 0.04 || n.lv === 5) {
-        ctx.font = `${n.on > 0.5 ? 600 : 500} ${11 + n.on * 2}px -apple-system, "Segoe UI", system-ui, sans-serif`;
-        ctx.textAlign = 'center'; ctx.textBaseline = 'bottom';
-        ctx.fillStyle = n.on > 0.04
-          ? `rgb(from ${fg} r g b / ${Math.max(n.on, 0.35) * dim})`
-          : `rgb(from ${fg3} r g b / ${0.55 * dim})`;
-        ctx.fillText(n.n, n.x, n.y - rad - 7);
-      }
+    // spokes
+    AXES.forEach((_, i) => {
+      const [x, y] = pt(i, 1);
+      ctx.beginPath(); ctx.moveTo(cx, cy); ctx.lineTo(x, y);
+      ctx.strokeStyle = soft; ctx.stroke();
     });
 
-    if (hovered) {
-      const t = `${hovered.cat} · ${LABEL[hovered.lv]}`;
-      ctx.font = '500 10.5px ui-monospace, "SF Mono", Menlo, monospace';
-      ctx.textAlign = 'center'; ctx.textBaseline = 'top';
-      ctx.fillStyle = fg3;
-      ctx.fillText(t, hovered.x, hovered.y + hovered.rad + 8);
+    // the shape
+    const dim = (i) => (active !== 'All' && AXES[i] !== active ? 0.22 : 1);
+    ctx.beginPath();
+    VALUES.forEach((v, i) => {
+      const [x, y] = pt(i, (v / 5) * grow);
+      i ? ctx.lineTo(x, y) : ctx.moveTo(x, y);
+    });
+    ctx.closePath();
+    const g = ctx.createLinearGradient(cx - R, cy - R, cx + R, cy + R);
+    g.addColorStop(0, `${gold}44`); g.addColorStop(1, `${gold2}22`);
+    ctx.fillStyle = g; ctx.fill();
+    ctx.strokeStyle = gold; ctx.lineWidth = 2; ctx.lineJoin = 'round'; ctx.stroke();
+
+    // vertices + labels
+    AXES.forEach((name, i) => {
+      const v = VALUES[i];
+      const [px, py] = pt(i, (v / 5) * grow);
+      const on = hover === i;
+      ctx.globalAlpha = dim(i);
+
+      ctx.beginPath(); ctx.arc(px, py, on ? 6 : 4, 0, 7);
+      ctx.fillStyle = on ? css('--gold-2') : gold; ctx.fill();
+      ctx.strokeStyle = css('--bg'); ctx.lineWidth = 2; ctx.stroke();
+
+      const [lx, ly] = pt(i, 1.30);
+      ctx.textAlign = Math.abs(lx - cx) < 6 ? 'center' : (lx > cx ? 'left' : 'right');
+      ctx.textBaseline = ly < cy - 4 ? 'bottom' : (ly > cy + 4 ? 'top' : 'middle');
+      ctx.font = `${on ? 650 : 560} 13px -apple-system, "Segoe UI", system-ui, sans-serif`;
+      ctx.fillStyle = on ? fg : css('--fg-2');
+      ctx.fillText(name, lx, ly);
+      ctx.font = '600 11px ui-monospace, Menlo, monospace';
+      ctx.fillStyle = gold;
+      ctx.fillText(v.toFixed(1), lx, ly + (ly < cy - 4 ? -15 : 15));
+      ctx.globalAlpha = 1;
+    });
+
+    // tooltip for the hovered axis
+    if (hover >= 0) {
+      const text = TOP[hover].join(' · ');
+      ctx.font = '11px ui-monospace, Menlo, monospace';
+      const w = ctx.measureText(text).width + 22;
+      const x = Math.max(8, Math.min(W - w - 8, cx - w / 2)), y = H - 30;
+      ctx.fillStyle = css('--bg-2'); ctx.strokeStyle = line; ctx.lineWidth = 1;
+      ctx.beginPath(); ctx.roundRect(x, y, w, 24, 8); ctx.fill(); ctx.stroke();
+      ctx.fillStyle = css('--fg-2'); ctx.textAlign = 'left'; ctx.textBaseline = 'middle';
+      ctx.fillText(text, x + 11, y + 12);
     }
+  }
 
-    requestAnimationFrame(frame);
-  };
+  cv.addEventListener('pointermove', (e) => {
+    const b = cv.getBoundingClientRect();
+    const mx = e.clientX - b.left, my = e.clientY - b.top;
+    const { pt } = geom();
+    let found = -1;
+    AXES.forEach((_, i) => {
+      const [x, y] = pt(i, (VALUES[i] / 5));
+      const [lx, ly] = pt(i, 1.3);
+      if (Math.hypot(x - mx, y - my) < 26 || Math.hypot(lx - mx, ly - my) < 42) found = i;
+    });
+    if (found !== hover) { hover = found; cv.style.cursor = found >= 0 ? 'pointer' : 'default'; draw(); }
+  });
+  cv.addEventListener('pointerleave', () => { hover = -1; draw(); });
+  addEventListener('themechange', draw);
+  addEventListener('resize', () => { resize(); draw(); });
 
-  // only animate while it's actually on screen
-  let running = false;
-  new IntersectionObserver(([e]) => {
-    if (e.isIntersecting && !running) { running = true; requestAnimationFrame(frame); }
-    else if (!e.isIntersecting) { running = false; }
-  }, { threshold: 0.05 }).observe(cv);
+  // grow the polygon out from the centre the first time it scrolls into view
+  new IntersectionObserver(([e], obs) => {
+    if (!e.isIntersecting) return;
+    obs.disconnect();
+    if (reduced) { grow = 1; return draw(); }
+    const t0 = performance.now();
+    const step = (t) => {
+      const p = Math.min((t - t0) / 900, 1);
+      grow = 1 - (1 - p) ** 3;
+      draw();
+      if (p < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  }, { threshold: 0.2 }).observe(cv);
+
+  draw();
 })();
 
 /* ══ playground tabs ═════════════════════════════════════════════════ */
