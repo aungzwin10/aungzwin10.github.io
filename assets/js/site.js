@@ -514,9 +514,12 @@ const LABEL = { 1: 'Fundamental', 2: 'Novice', 3: 'Intermediate', 4: 'Advanced',
 (() => {
   const y = $('#year'); if (y) y.textContent = new Date().getFullYear();
 
-  // "8+ years" stays true without anyone editing it
+  // "8+ years" stays true without anyone editing it.
+  // Only elements explicitly marked data-auto-years are rewritten — matching on
+  // [data-suffix="+"] would also hit the "40+ hospitals" counter and quietly
+  // turn it into "8+".
   const started = new Date('2017-12-01');
   const yrs = Math.floor((Date.now() - started) / 31557600000);
   const badge = $('#yearsBadge'); if (badge) badge.textContent = `${yrs}+`;
-  $$('[data-count][data-suffix="+"]').forEach((el) => { el.dataset.count = yrs; });
+  $$('[data-auto-years]').forEach((el) => { el.dataset.count = yrs; });
 })();
