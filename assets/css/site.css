@@ -785,9 +785,13 @@ footer { border-top: 1px solid var(--line-soft); padding-block: 3.5rem 2.5rem; p
 .foot-links a:hover { color: var(--gold); }
 .foot-note { font-size: .78rem; color: var(--fg-3); margin-top: 2.5rem; padding-top: 1.6rem; border-top: 1px solid var(--line-soft); display: flex; flex-wrap: wrap; gap: .6rem 1.4rem; justify-content: space-between; }
 
-/* ---------- reveal on scroll ---------- */
-.rv { opacity: 0; transform: translateY(20px); transition: opacity .8s var(--ease-out), transform .8s var(--ease-out); transition-delay: var(--d, 0ms); }
-.rv.in { opacity: 1; transform: none; }
+/* ---------- reveal on scroll ----------
+   Guarded behind .js, which site.js sets on <html> before anything else.
+   Without that guard a script failure — or a browser that never delivers the
+   IntersectionObserver callback — would leave the entire page at opacity 0.
+   No JS, no hiding: the content is simply visible. */
+.js .rv { opacity: 0; transform: translateY(20px); transition: opacity .8s var(--ease-out), transform .8s var(--ease-out); transition-delay: var(--d, 0ms); }
+.js .rv.in { opacity: 1; transform: none; }
 
 /* ---------- prose (security page) ---------- */
 .prose { max-width: 72ch; }
