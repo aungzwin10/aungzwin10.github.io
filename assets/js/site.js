@@ -33,6 +33,24 @@ const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
    module never runs, the class is never set and the page renders in full. */
 document.documentElement.classList.add('js');
 
+/**
+ * Run `fn` once, when `el` first becomes visible — or after `after` ms
+ * regardless. Browsers throttle IntersectionObserver in background tabs, so
+ * anything that starts at zero (a bar width, a chart that grows from the
+ * centre) would otherwise sit empty forever. Every entrance animation on this
+ * page goes through here so none of them can strand content.
+ */
+function onceVisible(el, fn, { threshold = 0.2, after = 2500 } = {}) {
+  // `t` and `io` are declared up front: observe() can invoke the callback
+  // before the following statements have run, and a const in its temporal
+  // dead zone would throw and take the whole module down with it.
+  let done = false, t, io;
+  const run = () => { if (done) return; done = true; clearTimeout(t); io?.disconnect(); fn(); };
+  io = new IntersectionObserver(([e]) => { if (e.isIntersecting) run(); }, { threshold });
+  io.observe(el);
+  if (!done) t = setTimeout(run, after);
+}
+
 /* ══ theme ═══════════════════════════════════════════════════════════ */
 (() => {
   const root = document.documentElement;
@@ -113,21 +131,17 @@ document.documentElement.classList.add('js');
 
 /* ══ count-up stats ══════════════════════════════════════════════════ */
 (() => {
-  const io = new IntersectionObserver((entries, obs) => {
-    entries.filter((e) => e.isIntersecting).forEach(({ target }) => {
-      obs.unobserve(target);
-      const to = +target.dataset.count, suffix = target.dataset.suffix || '';
-      if (reduced) { target.textContent = to + suffix; return; }
-      const t0 = performance.now(), dur = 1100;
-      const tick = (t) => {
-        const p = Math.min((t - t0) / dur, 1);
-        target.textContent = Math.round(to * (1 - (1 - p) ** 3)) + (p === 1 ? suffix : '');
-        if (p < 1) requestAnimationFrame(tick);
-      };
-      requestAnimationFrame(tick);
-    });
-  }, { threshold: 0.5 });
-  $$('[data-count]').forEach((el) => io.observe(el));
+  $$('[data-count]').forEach((target) => onceVisible(target, () => {
+    const to = +target.dataset.count, suffix = target.dataset.suffix || '';
+    if (reduced) { target.textContent = to + suffix; return; }
+    const t0 = performance.now(), dur = 1100;
+    const tick = (t) => {
+      const p = Math.min((t - t0) / dur, 1);
+      target.textContent = Math.round(to * (1 - (1 - p) ** 3)) + (p === 1 ? suffix : '');
+      if (p < 1) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  }, { threshold: 0.5 }));
 })();
 
 /* ══ cursor spotlight on cards ═══════════════════════════════════════ */
@@ -281,13 +295,10 @@ const LABEL = { 1: 'Fundamental', 2: 'Novice', 3: 'Intermediate', 4: 'Advanced',
     b.append(i); row.append(n, v, b); bars.append(row);
   });
 
-  // fill the bars only once they scroll into view
-  const io = new IntersectionObserver((e, obs) => {
-    if (!e[0].isIntersecting) return;
-    obs.disconnect();
+  // fill the bars once they scroll into view (or shortly after, regardless)
+  onceVisible(bars, () => {
     $$('.bar i', bars).forEach((i, k) => setTimeout(() => { i.style.width = i.dataset.w; }, k * 45));
   }, { threshold: 0.15 });
-  io.observe(bars);
 
   CATS.forEach((c, i) => {
     const b = document.createElement('button');
@@ -439,9 +450,7 @@ const LABEL = { 1: 'Fundamental', 2: 'Novice', 3: 'Intermediate', 4: 'Advanced',
   addEventListener('resize', () => { resize(); draw(); });
 
   // grow the polygon out from the centre the first time it scrolls into view
-  new IntersectionObserver(([e], obs) => {
-    if (!e.isIntersecting) return;
-    obs.disconnect();
+  onceVisible(cv, () => {
     if (reduced) { grow = 1; return draw(); }
     const t0 = performance.now();
     const step = (t) => {
@@ -451,7 +460,7 @@ const LABEL = { 1: 'Fundamental', 2: 'Novice', 3: 'Intermediate', 4: 'Advanced',
       if (p < 1) requestAnimationFrame(step);
     };
     requestAnimationFrame(step);
-  }, { threshold: 0.2 }).observe(cv);
+  });
 
   draw();
 })();
