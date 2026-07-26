@@ -56,7 +56,7 @@ console.log('headline numbers');
 /* The stats live inside #work — they were once their own headless section and
    got dropped in a reshuffle. Assert the placement, not just the values. */
 check('stats sit inside the work section', !!d.querySelector('#work .stats'), true);
-check('tech marquee present', !!d.querySelector('#work #marquee'), true);
+check('marquee removed', d.querySelector('#marquee'), null);
 const counters = [...d.querySelectorAll('.stat b')].map((b) => b.textContent.trim());
 check('hospitals',      counters[0], '40+');
 check('countries',      counters[1], '5');

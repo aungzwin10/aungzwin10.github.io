@@ -100,7 +100,7 @@ for (const [page, modules] of PAGES) {
 
   // the modules should have populated their containers
   const filled = {
-    'index.html': ['#timeline', '#skillBars', '#skillFilters', '#marquee'],
+    'index.html': ['#timeline', '#skillBars', '#skillFilters'],
     'demos/ehr.html': ['#ptList', '#vitals', '#meds', '#notes'],
     'demos/dashboard.html': ['#kpis', '#wards', '#donutKey', '#deptTable tbody'],
   }[page] ?? [];
