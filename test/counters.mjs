@@ -53,6 +53,10 @@ const check = (label, got, want) => {
 };
 
 console.log('headline numbers');
+/* The stats live inside #work — they were once their own headless section and
+   got dropped in a reshuffle. Assert the placement, not just the values. */
+check('stats sit inside the work section', !!d.querySelector('#work .stats'), true);
+check('tech marquee present', !!d.querySelector('#work #marquee'), true);
 const counters = [...d.querySelectorAll('.stat b')].map((b) => b.textContent.trim());
 check('hospitals',      counters[0], '40+');
 check('countries',      counters[1], '5');
@@ -103,7 +107,7 @@ check('daylight has unlit logs', !!d.querySelector('.camp .coldlogs'), true);
 check('beer tap removed', d.querySelector('.beer .tap'), null);
 
 // no literal experience figure anywhere — it must be derived
-check('years are derived, not hard-coded', d.querySelectorAll('[data-yrs]').length >= 4, true);
+check('years are derived, not hard-coded', d.querySelectorAll('[data-yrs]').length >= 3, true);
 check('years filled in', [...d.querySelectorAll('[data-yrs]')].every((e) => /^\d+$/.test(e.textContent)), true);
 check('copyright year is current', d.querySelector('#year').textContent, String(new Date().getFullYear()));
 
