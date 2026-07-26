@@ -77,5 +77,25 @@ check('each has a country', deploys.every((x) => /Myanmar|Cambodia/.test(x.query
 check('fun cards', d.querySelectorAll('.fun').length, 4);
 check('lifecycle steps', d.querySelectorAll('.arc li').length, 6);
 
+/* Store badges are one reusable component: identical label per kind, and always
+   ordered Play Store → App Store → anything else. */
+const LABEL = { play: 'Play Store', apple: 'App Store', demo: 'Live demo' };
+const RANK  = { play: 0, apple: 1, demo: 2 };
+const badges = [...d.querySelectorAll('.store')];
+check('every badge is tagged', badges.every((a) => a.dataset.store in LABEL), true);
+check('labels match their kind',
+  badges.every((a) => a.textContent.replace(/\s+/g, ' ').trim() === LABEL[a.dataset.store]), true);
+const groups = [...new Set(badges.map((a) => a.closest('.stores, .deploy')))].filter(Boolean);
+check('badge groups', groups.length, 11);   // 7 deployment tiles + 4 store rows
+check('order is Play → App Store → rest', groups.every((g) => {
+  const r = [...g.querySelectorAll('.store')].map((a) => RANK[a.dataset.store]);
+  return r.every((v, i) => i === 0 || r[i - 1] <= v);
+}), true);
+
+// no literal experience figure anywhere — it must be derived
+check('years are derived, not hard-coded', d.querySelectorAll('[data-yrs]').length >= 4, true);
+check('years filled in', [...d.querySelectorAll('[data-yrs]')].every((e) => /^\d+$/.test(e.textContent)), true);
+check('copyright year is current', d.querySelector('#year').textContent, String(new Date().getFullYear()));
+
 console.log(bad ? `\n${bad} FAILED` : '\nall good');
 process.exit(bad ? 1 : 0);   // the constellation's rAF loop would otherwise hang node
