@@ -156,21 +156,6 @@ function onceVisible(el, fn, { threshold = 0.2, after = 2500 } = {}) {
   }, { passive: true });
 })();
 
-/* ══ tech marquee ════════════════════════════════════════════════════ */
-(() => {
-  const strip = $('#marquee');
-  if (!strip) return;
-  const tech = ['Java', 'Spring Boot', 'Flutter', 'PostgreSQL', 'MS SQL Server',
-    'Docker', 'REST APIs', 'MySQL / MariaDB', 'JavaScript', 'Linux', 'Git',
-    'Perl', 'HTML5 & CSS3', 'Electronic Health Records', 'Hospital Information Systems'];
-  const row = () => {
-    const f = document.createDocumentFragment();
-    tech.forEach((t) => { const s = document.createElement('span'); s.textContent = t; f.append(s); });
-    return f;
-  };
-  strip.append(row(), row());   // duplicated so the -50% loop is seamless
-})();
-
 /* ══ career timeline ═════════════════════════════════════════════════ */
 const ROLES = [
   {
