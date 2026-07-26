@@ -106,7 +106,6 @@
       <a href="#skills">Skills</a>
       <a href="#about">About</a>
       <a href="#offduty">Off duty</a>
-      <a href="#hire">Hire me</a>
       <a href="#contact">Contact</a>
     </nav>
 
@@ -193,9 +192,6 @@
       <div class="stat"><b data-count="18">0</b><span>Live store listings<br>Apple &amp; Google Play</span></div>
     </div>
 
-    <div class="marquee rv" aria-hidden="true">
-      <div class="marquee-in" id="marquee"></div>
-    </div>
 
     <div class="work-grid">
 
@@ -576,41 +572,40 @@
               <g class="streaks"><path d="M24 84h32M10 98h40M32 110h26"/></g>
 
               <g class="bike">
-                <!-- mudguards sit behind the wheels -->
-                <path class="guard" d="M76 116a24 24 0 0 1 48 0"/>
-                <path class="guard" d="M198 108a22 22 0 0 1 34 8"/>
+                <!-- mudguards: arcs struck from the hubs so they follow the tyres -->
+                <path class="guard" d="M73 117a28 28 0 0 1 54 0"/>
+                <path class="guard" d="M191 117a28 28 0 0 1 54 0"/>
 
-                <!-- exhaust: engine down to a muffler by the rear hub -->
-                <path class="pipe" d="M156 130q-26 10-58 4"/>
+                <!-- exhaust sweeping back to a muffler beside the rear wheel -->
+                <path class="pipe" d="M152 128q-26 10-56 3"/>
 
-                <!-- engine block, cradled between the wheels -->
-                <path class="engine" d="M146 104h34l6 24h-46Z"/>
-                <path class="jug" d="M152 104l4-14h16l4 14Z"/>
+                <!-- engine, sitting in the frame cradle -->
+                <path class="engine" d="M150 102h30l5 24h-40Z"/>
+                <path class="jug" d="M156 102l3-13h14l3 13Z"/>
 
-                <!-- frame: top tube, down tube, seat stay, swingarm -->
-                <path class="frame" d="M126 92 L196 88"/>
-                <path class="frame" d="M196 88 L168 106"/>
-                <path class="frame" d="M126 92 L100 124"/>
-                <path class="frame" d="M126 92 L134 128"/>
-                <path class="frame" d="M134 128 L100 124"/>
+                <!-- frame -->
+                <path class="frame" d="M126 90 L196 84"/>
+                <path class="frame" d="M196 84 L170 102"/>
+                <path class="frame" d="M126 90 L100 124"/>
+                <path class="frame" d="M126 90 L134 126"/>
+                <path class="frame" d="M134 126 L100 124"/>
 
-                <!-- forks rake forward from the steering head to the front hub -->
-                <path class="fork" d="M196 86 L218 124"/>
-                <path class="fork" d="M203 84 L224 122"/>
+                <!-- forks rake from the steering head down to the front hub -->
+                <path class="fork" d="M196 82 L218 124"/>
+                <path class="fork" d="M202 80 L224 122"/>
 
-                <!-- tank and seat -->
-                <path class="tank" d="M144 92q4-15 22-16 20-1 26 9 3 5-3 6Z"/>
-                <path class="seat" d="M104 94q2-9 14-9h26v9Z"/>
+                <!-- tank and saddle -->
+                <path class="tank" d="M146 90q4-14 21-15 19-1 25 8 3 5-3 6Z"/>
+                <path class="seat" d="M102 92q2-9 14-9h30v9Z"/>
 
-                <!-- bars: grip ends where the rider's hand is -->
-                <path class="bars" d="M188 80 L204 82"/>
-                <circle class="grip" cx="190" cy="80" r="3.4"/>
+                <!-- bars; the grip is exactly where the rider's hand lands -->
+                <path class="bars" d="M186 74 L202 78"/>
+                <circle class="grip" cx="188" cy="74" r="3.4"/>
 
-                <!-- headlight in front of the forks, aimed down the road -->
-                <circle class="lamp" cx="212" cy="96" r="9"/>
-                <g class="beam"><path d="M222 92l30-8M222 100l30 6"/></g>
+                <!-- headlight clears the top of the front tyre (y=102) -->
+                <circle class="lamp" cx="212" cy="80" r="8"/>
+                <g class="beam"><path d="M221 76l30-7M221 84l30 5"/></g>
 
-                <!-- wheels last so the rims read on top of the frame -->
                 <g class="wheel" transform="translate(100 124)">
                   <circle class="tyre" r="22"/><circle class="rim" r="14"/>
                   <g class="spokes"><path d="M0-14V14M-14 0H14M-10-10 10 10M-10 10 10-10"/></g>
@@ -625,12 +620,12 @@
 
               <!-- rider: seated on the saddle, hand meeting the grip at 190,80 -->
               <g class="body">
-                <path class="thigh" d="M126 88 L148 100"/>
-                <path class="shin"  d="M148 100 L143 120"/>
-                <path class="torso" d="M126 88 L150 60"/>
-                <path class="arm"   d="M150 62 L190 80"/>
-                <circle class="helmet" cx="158" cy="52" r="12"/>
-                <path class="visor" d="M166 46a12 12 0 0 1 2 10l-9 1Z"/>
+                <path class="thigh" d="M126 86 L148 98"/>
+                <path class="shin"  d="M148 98 L143 118"/>
+                <path class="torso" d="M126 86 L150 58"/>
+                <path class="arm"   d="M150 60 L188 74"/>
+                <circle class="helmet" cx="158" cy="48" r="12"/>
+                <path class="visor" d="M166 42a12 12 0 0 1 2 10l-9 1Z"/>
               </g>
             </g>
 
@@ -664,10 +659,10 @@
 
             <!-- one slot, two occupants: sun by day, crescent moon by night -->
             <g class="daystar">
-              <circle class="sun-halo" cx="252" cy="40" r="26"/>
-              <circle class="sun" cx="252" cy="40" r="15"/>
+              <circle class="sun-halo" cx="222" cy="34" r="26"/>
+              <circle class="sun" cx="222" cy="34" r="15"/>
               <!-- a true crescent path: no second circle painted over the sky -->
-              <path class="moon" d="M252 25a15 15 0 1 0 12 24 12 12 0 0 1-12-24Z"/>
+              <path class="moon" d="M222 19a15 15 0 1 0 12 24 12 12 0 0 1-12-24Z"/>
             </g>
 
             <!-- daytime only -->
