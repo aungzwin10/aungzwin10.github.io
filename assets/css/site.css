@@ -791,13 +791,20 @@ p  { text-wrap: pretty; }
 .ride .frame, .ride .fork, .ride .bars, .ride .pipe, .ride .guard {
   fill: none; stroke: var(--gold); stroke-width: 4; stroke-linecap: round; stroke-linejoin: round;
 }
+.ride .grip { fill: var(--fg-2); }
+.ride .jug  { fill: var(--gold-dim); }
 .ride .pipe  { stroke: var(--fg-3); stroke-width: 5; }
 .ride .guard { stroke: var(--gold-dim); stroke-width: 3.4; }
 .ride .tank  { fill: var(--gold); }
 .ride .seat  { fill: var(--fg-2); }
 .ride .engine{ fill: var(--gold-dim); }
-.ride .lamp  { fill: #fff3d0; stroke: var(--gold); stroke-width: 2.4; }
-.ride .beam  { stroke: var(--gold-2); stroke-width: 2.2; stroke-linecap: round; fill: none; opacity: .55; }
+/* headlight burns after dark only; by day it is an unlit glass lens */
+.ride .lamp { fill: #fff3d0; stroke: var(--gold); stroke-width: 2.4; }
+.ride .beam { stroke: #ffe9a8; stroke-width: 2.6; stroke-linecap: round; fill: none; opacity: .6; }
+.fun-ride.in .lamp { filter: drop-shadow(0 0 7px rgb(255 226 150 / .75)); }
+:root[data-theme="light"] .ride .lamp { fill: var(--bg-3); stroke: var(--fg-3); filter: none; }
+:root[data-theme="light"] .fun-ride.in .lamp { filter: none; }
+:root[data-theme="light"] .ride .beam { display: none; }
 .ride .body  { fill: none; stroke: var(--fg-2); stroke-width: 6; stroke-linecap: round; stroke-linejoin: round; }
 .ride .helmet{ fill: var(--fg-2); stroke: none; }
 .ride .visor { fill: var(--gold-2); stroke: none; }
@@ -1015,3 +1022,12 @@ footer { border-top: 1px solid var(--line-soft); padding-block: 3.5rem 2.5rem; p
   body::before { display: none; }
   a::after { content: " (" attr(href) ")"; font-size: .8em; color: #555; }
 }
+
+/* ---------- education folded into the skills section ---------- */
+.edu-band { margin-top: clamp(2.5rem, 5vw, 3.5rem); padding-top: clamp(2rem, 4vw, 2.75rem); border-top: 1px solid var(--line-soft); }
+.edu-head {
+  font-family: var(--mono); font-size: .72rem; letter-spacing: .18em;
+  text-transform: uppercase; color: var(--gold); font-weight: 500; margin-bottom: 1.5rem;
+  display: flex; align-items: center; gap: .7rem;
+}
+.edu-head::after { content: ""; flex: 1; height: 1px; background: linear-gradient(90deg, var(--line), transparent); }
