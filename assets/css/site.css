@@ -398,6 +398,46 @@ p  { text-wrap: pretty; }
 .proj-desc { font-size: .94rem; color: var(--fg-2); max-width: 64ch; }
 .proj-stack { display: flex; flex-wrap: wrap; gap: .42rem; margin-top: 1.3rem; }
 .proj-links { display: flex; flex-wrap: wrap; gap: 1.3rem; margin-top: 1.5rem; }
+
+/* ---------- platform reach + store badges ---------- */
+.sprite { position: absolute; width: 0; height: 0; overflow: hidden; }
+.platforms {
+  display: flex; flex-wrap: wrap; align-items: center; gap: .5rem;
+  margin-top: 1.05rem;
+  font-family: var(--mono); font-size: .68rem; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--fg-3);
+}
+.platforms b {
+  font-weight: 500; color: var(--gold);
+  padding-right: .55rem; margin-right: .1rem;
+  border-right: 1px solid var(--line);
+}
+.platforms span { display: inline-flex; align-items: center; gap: .3rem; }
+.platforms span::before { content: "▪"; color: var(--gold-dim); font-size: .6em; }
+
+.stores { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1.35rem; }
+.store {
+  display: inline-flex; align-items: center; gap: .5rem;
+  padding: .42rem .85rem .42rem .7rem;
+  border: 1px solid var(--line); border-radius: 100px;
+  background: var(--bg-2); font-size: .8rem; color: var(--fg-2);
+  transition: border-color .3s, color .3s, transform .35s var(--ease-out), background .3s;
+}
+.store:hover { border-color: var(--gold-dim); color: var(--fg); transform: translateY(-2px); background: var(--bg-3); }
+.store svg { width: 14px; height: 14px; flex: none; }
+.store i { font-style: normal; color: var(--fg-3); font-size: .92em; }
+.store:hover i { color: var(--gold); }
+
+/* the "where's the code?" note */
+.src-note {
+  display: flex; gap: .85rem; align-items: flex-start;
+  margin-top: 2.25rem; padding: 1.05rem 1.2rem;
+  border: 1px solid var(--line); border-left: 2px solid var(--gold-dim);
+  border-radius: var(--r); background: var(--bg-1);
+  font-size: .88rem; color: var(--fg-2); line-height: 1.6;
+}
+.src-note svg { width: 18px; height: 18px; flex: none; color: var(--gold); margin-top: .15rem; }
+.src-note strong { color: var(--fg); font-weight: 600; }
 .feature-row { display: grid; grid-template-columns: 1.05fr .95fr; gap: clamp(1.5rem, 4vw, 3rem); align-items: center; }
 .device-mini {
   border-radius: var(--r); border: 1px solid var(--line);
