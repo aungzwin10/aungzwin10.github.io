@@ -57,15 +57,25 @@ const counters = [...d.querySelectorAll('.stat b')].map((b) => b.textContent.tri
 check('hospitals',      counters[0], '40+');
 check('countries',      counters[1], '5');
 check('products',       counters[2], '11');
-check('store listings', counters[3], '13');
+check('store listings', counters[3], '18');
 
-// the "13 listings" claim and the actual links must not drift apart
+// the "18 listings" claim and the actual links must not drift apart
 const storeLinks = [...d.querySelectorAll('.store')]
   .filter((a) => /play\.google\.com|apps\.apple\.com/.test(a.getAttribute('href') || ''));
-check('store links in markup', storeLinks.length, 13);
+check('store links in markup', storeLinks.length, 18);
 check('portrait badge suffix', /^\d+\+$/.test(d.querySelector('#yearsBadge').textContent), true);
 check('platform rows', d.querySelectorAll('.platforms').length, 8);
 check('source note present', !!d.querySelector('.src-note'), true);
+
+// every Patient Portal deployment needs both stores and a country
+const deploys = [...d.querySelectorAll('.deploy')];
+check('hospital deployments', deploys.length, 7);
+check('each has 2 store links', deploys.every((x) => x.querySelectorAll('.store').length === 2), true);
+check('each has a country', deploys.every((x) => /Myanmar|Cambodia/.test(x.querySelector('em')?.textContent || '')), true);
+
+// the off-the-clock section
+check('fun cards', d.querySelectorAll('.fun').length, 4);
+check('lifecycle steps', d.querySelectorAll('.arc li').length, 6);
 
 console.log(bad ? `\n${bad} FAILED` : '\nall good');
 process.exit(bad ? 1 : 0);   // the constellation's rAF loop would otherwise hang node
