@@ -45,6 +45,7 @@ ol.code li::before{
   content:counter(ln);text-align:right;color:var(--fg-3);opacity:.45;
   padding-right:.2rem;font-size:.68rem;user-select:none;
 }
+ol.code li > code{font:inherit;white-space:pre;min-width:0;display:block}
 ol.code li:hover{background:color-mix(in srgb,var(--gold) 7%,transparent);border-left-color:var(--gold-dim)}
 ol.code[data-locked] li{cursor:default}
 ol.code[data-locked] li:hover{background:none;border-left-color:transparent}
