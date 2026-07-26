@@ -545,51 +545,46 @@
         <span class="fun-tag">Beer</span>
         <h3>Cold one, earned.</h3>
         <p>Preferably after a deploy that went out clean on a Friday.</p>
-        <div class="beer" aria-hidden="true">
-          <svg viewBox="0 0 200 140" role="img">
+        <div class="beer fun-art" aria-hidden="true">
+          <svg viewBox="0 0 320 170" role="img">
             <defs>
-              <clipPath id="mugClip"><path d="M30 44h64v74a12 12 0 0 1-12 12H42a12 12 0 0 1-12-12Z"/></clipPath>
-              <clipPath id="mugClip2"><path d="M112 52h56v66a12 12 0 0 1-12 12h-32a12 12 0 0 1-12-12Z"/></clipPath>
+              <clipPath id="mugClipL"><path d="M64 56h72v78a12 12 0 0 1-12 12H76a12 12 0 0 1-12-12Z"/></clipPath>
+              <clipPath id="mugClipR"><path d="M184 56h72v78a12 12 0 0 1-12 12h-48a12 12 0 0 1-12-12Z"/></clipPath>
               <linearGradient id="ale" x1="0" y1="0" x2="0" y2="1">
                 <stop offset="0" stop-color="#ffdc82"/><stop offset=".45" stop-color="#f5b02f"/><stop offset="1" stop-color="#c97615"/>
               </linearGradient>
             </defs>
 
-            <!-- tap -->
-            <g class="tap">
-              <path class="tap-body" d="M52 6h10v18h-10Z"/>
-              <path class="tap-body" d="M46 24h22v7H46Z"/>
-              <path class="tap-arm" d="M57 6V0"/>
-            </g>
-            <rect class="pour" x="54" y="31" width="6" height="20" rx="3"/>
-
             <g class="mug mug-a">
-              <g clip-path="url(#mugClip)">
-                <rect class="ale" x="28" y="130" width="68" height="100" fill="url(#ale)"/>
-                <g class="head"><ellipse cx="44" cy="52" rx="17" ry="11"/><ellipse cx="66" cy="48" rx="19" ry="12"/><ellipse cx="84" cy="53" rx="15" ry="10"/></g>
+              <path class="mug-line" d="M64 74H48a13 13 0 0 0 0 34h16"/>
+              <g clip-path="url(#mugClipL)">
+                <rect class="ale" x="62" y="150" width="76" height="110" fill="url(#ale)"/>
+                <g class="head"><ellipse cx="80" cy="64" rx="18" ry="11"/><ellipse cx="104" cy="60" rx="20" ry="12"/><ellipse cx="124" cy="65" rx="16" ry="10"/></g>
                 <g class="fizz">
-                  <circle cx="44" cy="124" r="3.2"/><circle cx="60" cy="124" r="2.3"/><circle cx="76" cy="124" r="2.8"/>
-                  <circle cx="52" cy="124" r="2"/><circle cx="68" cy="124" r="3.4"/><circle cx="84" cy="124" r="2.1"/>
+                  <circle cx="80" cy="140" r="3.2"/><circle cx="98" cy="140" r="2.3"/><circle cx="116" cy="140" r="2.9"/>
+                  <circle cx="89" cy="140" r="2"/><circle cx="107" cy="140" r="3.4"/><circle cx="125" cy="140" r="2.2"/>
                 </g>
               </g>
-              <path class="mug-line" d="M30 44h64v74a12 12 0 0 1-12 12H42a12 12 0 0 1-12-12Z"/>
-              <path class="mug-line" d="M94 64h14a12 12 0 0 1 0 32H94"/>
-              <g class="frost"><path d="M40 62v14M52 70v12M78 66v13M66 78v10"/></g>
+              <path class="mug-line" d="M64 56h72v78a12 12 0 0 1-12 12H76a12 12 0 0 1-12-12Z"/>
+              <g class="frost"><path d="M76 78v15M92 88v13M120 82v14M106 96v11"/></g>
             </g>
 
             <g class="mug mug-b">
-              <g clip-path="url(#mugClip2)">
-                <rect class="ale" x="110" y="130" width="60" height="100" fill="url(#ale)"/>
-                <g class="head"><ellipse cx="126" cy="60" rx="15" ry="10"/><ellipse cx="148" cy="57" rx="16" ry="10"/></g>
-                <g class="fizz"><circle cx="128" cy="124" r="2.6"/><circle cx="146" cy="124" r="2"/><circle cx="158" cy="124" r="2.9"/></g>
+              <path class="mug-line" d="M256 74h16a13 13 0 0 1 0 34h-16"/>
+              <g clip-path="url(#mugClipR)">
+                <rect class="ale" x="182" y="150" width="76" height="110" fill="url(#ale)"/>
+                <g class="head"><ellipse cx="200" cy="64" rx="18" ry="11"/><ellipse cx="224" cy="60" rx="20" ry="12"/><ellipse cx="244" cy="65" rx="16" ry="10"/></g>
+                <g class="fizz">
+                  <circle cx="200" cy="140" r="3"/><circle cx="218" cy="140" r="2.2"/><circle cx="236" cy="140" r="2.8"/>
+                  <circle cx="209" cy="140" r="2"/><circle cx="227" cy="140" r="3.3"/><circle cx="245" cy="140" r="2.1"/>
+                </g>
               </g>
-              <path class="mug-line" d="M112 52h56v66a12 12 0 0 1-12 12h-32a12 12 0 0 1-12-12Z"/>
-              <path class="mug-line" d="M168 70h13a12 12 0 0 1 0 30h-13"/>
-              <g class="frost"><path d="M122 78v12M140 74v13M156 82v10"/></g>
+              <path class="mug-line" d="M184 56h72v78a12 12 0 0 1-12 12h-48a12 12 0 0 1-12-12Z"/>
+              <g class="frost"><path d="M196 78v15M212 88v13M240 82v14M226 96v11"/></g>
             </g>
 
-            <g class="clink"><path d="M103 34v-11M92 40l-8-8M114 40l8-8"/></g>
-            <g class="splash"><circle cx="96" cy="46" r="2.4"/><circle cx="110" cy="42" r="1.9"/><circle cx="103" cy="52" r="2.1"/></g>
+            <g class="clink"><path d="M160 44v-14M144 50l-10-10M176 50l10-10"/></g>
+            <g class="splash"><circle cx="150" cy="58" r="2.6"/><circle cx="170" cy="54" r="2.1"/><circle cx="160" cy="66" r="2.3"/></g>
           </svg>
         </div>
       </article>
@@ -599,37 +594,69 @@
         <span class="fun-tag">Motorbike</span>
         <h3>The commute I actually choose.</h3>
         <p>Mandalay is best seen at road level, with the throttle open a little more than strictly necessary.</p>
-        <div class="ride" aria-hidden="true">
-          <svg viewBox="0 0 320 140" role="img" preserveAspectRatio="xMidYMid slice">
-            <g class="far"><path d="M-20 92 L26 50 L72 92 Z M64 92 L124 40 L184 92 Z M176 92 L228 56 L280 92 Z M272 92 L318 58 L364 92 Z"/></g>
+        <div class="ride fun-art" aria-hidden="true">
+          <svg viewBox="0 0 320 170" role="img">
+            <g class="far"><path d="M-20 112 L26 66 L72 112 Z M64 112 L124 54 L184 112 Z M176 112 L228 72 L280 112 Z M272 112 L318 74 L364 112 Z"/></g>
             <g class="mid">
-              <path d="M0 100h320v6H0Z"/>
-              <g class="posts"><path d="M30 100V72M110 100V72M190 100V72M270 100V72M350 100V72"/></g>
+              <path d="M0 122h320v6H0Z"/>
+              <g class="posts"><path d="M30 122V92M110 122V92M190 122V92M270 122V92M350 122V92"/></g>
             </g>
 
             <g class="rider">
-              <g class="exhaust"><circle cx="58" cy="86" r="4"/><circle cx="44" cy="82" r="5.5"/><circle cx="28" cy="78" r="7"/></g>
-              <g class="streaks"><path d="M22 56h30M10 68h38M30 78h24"/></g>
-              <g class="frame">
-                <circle class="w" cx="92" cy="104" r="17"/>
-                <circle class="w" cx="188" cy="104" r="17"/>
-                <path d="M92 104l22-28h36l16 28"/>
-                <path d="M114 76h40"/>
-                <path d="M154 76l14-15h16"/>
-                <path d="M166 104h22"/>
-                <path class="seat" d="M112 74h26"/>
+              <g class="exhaust"><circle cx="74" cy="128" r="4"/><circle cx="58" cy="124" r="5.5"/><circle cx="40" cy="119" r="7"/></g>
+              <g class="streaks"><path d="M30 78h32M16 92h40M38 104h26"/></g>
+
+              <g class="bike">
+                <!-- wheels -->
+                <g class="wheel" transform="translate(112 128)">
+                  <circle class="tyre" r="23"/><circle class="rim" r="15"/>
+                  <g class="spokes"><path d="M0-15V15M-15 0H15M-11-11 11 11M-11 11 11-11"/></g>
+                  <circle class="hub" r="3.5"/>
+                </g>
+                <g class="wheel" transform="translate(224 128)">
+                  <circle class="tyre" r="23"/><circle class="rim" r="15"/>
+                  <g class="spokes"><path d="M0-15V15M-15 0H15M-11-11 11 11M-11 11 11-11"/></g>
+                  <circle class="hub" r="3.5"/>
+                </g>
+
+                <!-- exhaust pipe + engine -->
+                <path class="pipe" d="M156 132q-22 6-44 2"/>
+                <path class="engine" d="M150 108h30l6 20h-42Z"/>
+
+                <!-- frame -->
+                <path class="frame" d="M112 128 L140 96 L186 96 L206 106 L224 128"/>
+                <path class="frame" d="M140 96 L152 128"/>
+                <path class="frame" d="M206 106 L216 84"/>
+                <!-- front forks -->
+                <path class="fork" d="M216 84 L224 128"/>
+                <path class="fork" d="M209 86 L217 128"/>
+
+                <!-- teardrop tank -->
+                <path class="tank" d="M152 96q6-16 26-16 14 0 18 10 2 6-4 6Z"/>
+                <!-- seat -->
+                <path class="seat" d="M120 96q4-10 18-10h18v10Z"/>
+                <!-- rear mudguard -->
+                <path class="guard" d="M92 116q10-18 34-18"/>
+
+                <!-- handlebar + headlight -->
+                <path class="bars" d="M204 78h22"/>
+                <circle class="lamp" cx="230" cy="88" r="8"/>
+                <path class="beam" d="M240 84l26-8M240 92l26 6"/>
               </g>
+
+              <!-- rider: leaning forward, arm to bar, leg to peg -->
               <g class="body">
-                <circle class="helmet" cx="142" cy="42" r="12"/>
-                <path class="visor" d="M150 38a12 12 0 0 1 0 8"/>
-                <path d="M142 54l-8 20h20"/>
-                <path d="M139 60l28 3"/>
-                <path d="M134 74l-10 18"/>
+                <path class="torso" d="M150 92 L166 66"/>
+                <path class="arm"   d="M164 70 L204 78"/>
+                <path class="thigh" d="M150 92 L166 104"/>
+                <path class="shin"  d="M166 104 L162 124"/>
+                <circle class="helmet" cx="170" cy="58" r="13"/>
+                <path class="visor" d="M178 52a13 13 0 0 1 2 10l-9 1Z"/>
               </g>
             </g>
 
-            <line class="tarmac" x1="0" y1="122" x2="320" y2="122"/>
-            <g class="dashes"><path d="M0 122h34M56 122h34M112 122h34M168 122h34M224 122h34M280 122h34M336 122h34"/></g>
+            <line class="tarmac" x1="0" y1="146" x2="320" y2="146"/>
+            <g class="dashes"><path d="M0 146h34M56 146h34M112 146h34M168 146h34M224 146h34M280 146h34M336 146h34"/></g>
           </svg>
         </div>
       </article>
@@ -639,7 +666,7 @@
         <span class="fun-tag">Outdoors</span>
         <h3>Away from the screen entirely.</h3>
         <p>Rivers, hills, anywhere without a notification badge. <span data-yrs>8</span> years of remote work makes going outside non-negotiable.</p>
-        <div class="camp" aria-hidden="true">
+        <div class="camp fun-art" aria-hidden="true">
           <svg viewBox="0 0 320 170" role="img" preserveAspectRatio="xMidYMax slice">
             <defs>
               <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop class="sky-a" offset="0"/><stop class="sky-b" offset="1"/></linearGradient>
@@ -648,6 +675,7 @@
             </defs>
             <rect class="sky" width="320" height="170" fill="url(#sky)"/>
 
+            <!-- night sky -->
             <g class="stars">
               <circle cx="30" cy="22" r="1.3"/><circle cx="68" cy="13" r="1"/><circle cx="104" cy="28" r="1.4"/>
               <circle cx="150" cy="11" r="1"/><circle cx="196" cy="20" r="1.2"/><circle cx="240" cy="14" r="1"/>
@@ -655,13 +683,16 @@
             </g>
             <g class="shooting"><path d="M0 0l16 7"/></g>
 
+            <!-- one slot, two occupants: sun by day, crescent moon by night -->
             <g class="daystar">
               <circle class="sun-halo" cx="252" cy="40" r="26"/>
               <circle class="sun" cx="252" cy="40" r="15"/>
-              <g class="moon"><circle cx="252" cy="40" r="14"/><circle class="moon-cut" cx="245" cy="34" r="13"/></g>
+              <!-- a true crescent path: no second circle painted over the sky -->
+              <path class="moon" d="M252 25a15 15 0 1 0 12 24 12 12 0 0 1-12-24Z"/>
             </g>
 
-            <g class="birds"><path d="M60 44q5-5 10 0"/><path d="M78 36q5-5 10 0"/><path d="M96 46q5-5 10 0"/></g>
+            <!-- daytime only -->
+            <g class="birds"><path d="M60 46q5-5 10 0"/><path d="M78 38q5-5 10 0"/><path d="M96 48q5-5 10 0"/></g>
 
             <path class="mtn mtn-far"  d="M-16 104 L44 42 L100 104 Z M86 104 L152 30 L218 104 Z M200 104 L258 50 L326 104 Z"/>
             <path class="snow" d="M44 42 L31 55 L39 57 L48 52 L57 57 Z M152 30 L138 46 L148 48 L158 43 L168 48 Z M258 50 L247 62 L255 63 L263 59 L271 63 Z"/>
@@ -689,6 +720,9 @@
               <path class="tent-pole" d="M114 79v6"/>
               <path class="tent-guy" d="M114 86l16 38M114 86l-18 38"/>
             </g>
+
+            <!-- the fire only burns after dark; by day it is a cold pit -->
+            <g class="firepit"><path class="stones" d="M152 126h32"/></g>
             <g class="fire">
               <circle class="glow" cx="168" cy="116" r="26" fill="url(#fireGlow)"/>
               <path class="logs" d="M156 124l24-7M156 117l24 7"/>
@@ -700,6 +734,8 @@
                 <circle cx="171" cy="92" r=".9"/><circle cx="165" cy="88" r="1"/>
               </g>
             </g>
+            <!-- unlit logs, shown in daylight in place of the fire -->
+            <g class="coldlogs"><path d="M156 124l24-7M156 117l24 7"/></g>
           </svg>
         </div>
       </article>
