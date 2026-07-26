@@ -14,7 +14,10 @@
    ------------------------------------------------------------------------ */
 const CONFIG = {
   formAccessKey: '',
-  github:        'https://github.com/aungzwin10',
+  // Deliberately blank: all my work lives in my employer's self-hosted GitLab,
+  // so a link here would send people to an empty profile. The work section says
+  // so plainly instead. Fill this in if the profile ever has something on it.
+  github:        '',
   linkedin:      'https://www.linkedin.com/in/aungzwin10/',
 };
 
@@ -148,8 +151,11 @@ const ROLES = [
     points: [
       'Own 11 products in parallel — 6 mobile apps and 5 web apps — from roadmap through release.',
       'Still hands-on: design and build the Spring Boot REST APIs the whole suite depends on.',
-      'Portfolio spans Hospital E-book, Nursing E-book, Patient Portal, Consent Form, Central Registration, Patient Charges, Anzer Accounting & ERP, Management Dashboard, Accounting Dashboard and the Patient Portal admin panel.',
-      'Two of these apps are published and maintained on Google Play.',
+      'Portfolio spans Hospital E-book, Nursing E-book, Patient Portal, Consent Forms, Central Registration, Patient Charges, Anzer Accounting & ERP, Management Dashboard, Accounting Dashboard and the Patient Portal admin panel.',
+      'Products live in 40+ hospitals across Myanmar, Cambodia, India, Pakistan and the Philippines.',
+      'Thirteen live store listings across Apple and Google Play, including seven separately branded hospital deployments of the Patient Portal from a single codebase.',
+      'The clinical apps ship to four platforms from one Flutter codebase — iOS, Android, Windows and macOS.',
+      'Worked fully remote throughout.',
     ],
   },
   {
