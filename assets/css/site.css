@@ -137,7 +137,7 @@ body::before {
 /* ---------- layout ---------- */
 .shell { width: var(--shell); margin-inline: auto; position: relative; z-index: 1; }
 main { position: relative; z-index: 1; }
-section { padding-block: clamp(5rem, 11vw, 9rem); position: relative; }
+section { padding-block: clamp(3.25rem, 6.5vw, 5.25rem); position: relative; }
 .rule { border-top: 1px solid var(--line-soft); }
 
 /* ---------- type ---------- */
@@ -173,7 +173,7 @@ p  { text-wrap: pretty; }
   content: ""; width: 26px; height: 1px;
   background: linear-gradient(90deg, transparent, var(--gold));
 }
-.sec-head { max-width: 66ch; margin-bottom: clamp(2.5rem, 5vw, 3.75rem); }
+.sec-head { max-width: 66ch; margin-bottom: clamp(1.9rem, 3.4vw, 2.6rem); }
 .sec-head .lede { margin-top: 1.15rem; }
 
 /* gold gradient text */
@@ -320,7 +320,7 @@ p  { text-wrap: pretty; }
 }
 
 /* ---------- hero ---------- */
-.hero { padding-block: clamp(3rem, 7vw, 6rem) clamp(4rem, 8vw, 7rem); }
+.hero { padding-block: clamp(2rem, 4.5vw, 3.5rem) clamp(2.75rem, 5.5vw, 4.5rem); }
 .hero-grid {
   display: grid; gap: clamp(2.5rem, 5vw, 4.5rem);
   grid-template-columns: 1.22fr .78fr; align-items: center;
@@ -373,13 +373,6 @@ p  { text-wrap: pretty; }
 }
 .stat span { display: block; margin-top: .55rem; font-size: .81rem; color: var(--fg-3); line-height: 1.4; }
 
-/* ---------- marquee ---------- */
-.marquee { overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 9%, #000 91%, transparent); mask-image: linear-gradient(90deg, transparent, #000 9%, #000 91%, transparent); }
-.marquee-in { display: flex; gap: 2.6rem; width: max-content; animation: slide 42s linear infinite; }
-.marquee:hover .marquee-in { animation-play-state: paused; }
-.marquee span { font-size: .92rem; color: var(--fg-3); display: inline-flex; align-items: center; gap: 2.6rem; white-space: nowrap; }
-.marquee span::after { content: "◆"; font-size: .45rem; color: var(--gold-dim); }
-@keyframes slide { to { transform: translateX(-50%); } }
 
 /* ---------- tracks (hire vs contract) ---------- */
 .tracks { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; align-items: stretch; }
@@ -784,28 +777,29 @@ p  { text-wrap: pretty; }
 .fun-ride.in .dashes { animation: dash .5s linear infinite; }
 @keyframes dash { to { transform: translateX(-56px) } }
 
-.ride .tyre  { fill: none; stroke: var(--fg-2); stroke-width: 5; }
+.ride .tyre  { fill: none; stroke: var(--fg-2); stroke-width: 5.4; }
 .ride .rim   { fill: none; stroke: var(--gold); stroke-width: 2.6; }
 .ride .spokes{ stroke: var(--gold-dim); stroke-width: 1.6; fill: none; }
 .ride .hub   { fill: var(--gold); }
 .ride .frame, .ride .fork, .ride .bars, .ride .pipe, .ride .guard {
-  fill: none; stroke: var(--gold); stroke-width: 4; stroke-linecap: round; stroke-linejoin: round;
+  fill: none; stroke: var(--gold); stroke-width: 3.4; stroke-linecap: round; stroke-linejoin: round;
 }
 .ride .grip { fill: var(--fg-2); }
 .ride .jug  { fill: var(--gold-dim); }
 .ride .pipe  { stroke: var(--fg-3); stroke-width: 5; }
-.ride .guard { stroke: var(--gold-dim); stroke-width: 3.4; }
+.ride .guard { stroke: var(--gold-dim); stroke-width: 4.4; }
 .ride .tank  { fill: var(--gold); }
-.ride .seat  { fill: var(--fg-2); }
+.ride .seat  { fill: #2b2118; }          /* dark leather — the rider is --fg-2 */
 .ride .engine{ fill: var(--gold-dim); }
 /* headlight burns after dark only; by day it is an unlit glass lens */
 .ride .lamp { fill: #fff3d0; stroke: var(--gold); stroke-width: 2.4; }
 .ride .beam { stroke: #ffe9a8; stroke-width: 2.6; stroke-linecap: round; fill: none; opacity: .6; }
 .fun-ride.in .lamp { filter: drop-shadow(0 0 7px rgb(255 226 150 / .75)); }
+:root[data-theme="light"] .ride .seat { fill: #241c14; }
 :root[data-theme="light"] .ride .lamp { fill: var(--bg-3); stroke: var(--fg-3); filter: none; }
 :root[data-theme="light"] .fun-ride.in .lamp { filter: none; }
 :root[data-theme="light"] .ride .beam { display: none; }
-.ride .body  { fill: none; stroke: var(--fg-2); stroke-width: 6; stroke-linecap: round; stroke-linejoin: round; }
+.ride .body  { fill: none; stroke: var(--fg-2); stroke-width: 5.4; stroke-linecap: round; stroke-linejoin: round; }
 .ride .helmet{ fill: var(--fg-2); stroke: none; }
 .ride .visor { fill: var(--gold-2); stroke: none; }
 .ride .streaks { stroke: var(--gold-dim); stroke-width: 2.6; stroke-linecap: round; fill: none; opacity: 0; }
@@ -948,7 +942,7 @@ p  { text-wrap: pretty; }
 .cline .arrow { margin-left: auto; opacity: .4; }
 
 /* ---------- footer ---------- */
-footer { border-top: 1px solid var(--line-soft); padding-block: 3.5rem 2.5rem; position: relative; z-index: 1; }
+footer { border-top: 1px solid var(--line-soft); padding-block: 2.5rem 2rem; position: relative; z-index: 1; }
 .foot-grid { display: flex; flex-wrap: wrap; gap: 2rem; justify-content: space-between; align-items: flex-end; }
 .foot-links { display: flex; flex-wrap: wrap; gap: 1.5rem; font-size: .87rem; color: var(--fg-3); }
 .foot-links a:hover { color: var(--gold); }
