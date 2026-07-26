@@ -70,7 +70,12 @@ function renderRound() {
   b.lines.forEach((line, i) => {
     const li = document.createElement('li');
     if (line.trim() === '') li.classList.add('blank');
-    li.append(tokenise(line || ' '));
+    // the tokens must live inside ONE element: the <li> is a grid
+    // (line-number column + code column), so loose spans would each
+    // become their own grid item and the line would fall apart.
+    const code = document.createElement('code');
+    code.append(tokenise(line || ' '));
+    li.append(code);
     li.addEventListener('click', () => answer(i));
     ol.append(li);
   });
