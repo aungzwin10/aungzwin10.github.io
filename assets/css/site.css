@@ -386,6 +386,51 @@ p  { text-wrap: pretty; }
 .track .btn { margin-top: auto; align-self: flex-start; }
 .track ul + .btn { margin-top: 1.9rem; }
 
+/* ---------- lifecycle arc ---------- */
+.lifecycle { margin-top: 1.5rem; }
+.lifecycle-lead {
+  font-size: 1.02rem; color: var(--fg-2); letter-spacing: -.012em;
+  margin: 1.6rem 0 1.5rem; text-align: center; text-wrap: balance;
+}
+.lifecycle-lead::before,
+.lifecycle-lead::after { content: "—"; color: var(--gold-dim); margin: 0 .55rem; }
+.arc {
+  list-style: none; padding: 0; margin: 0;
+  display: grid; grid-template-columns: repeat(6, 1fr); gap: .6rem;
+  counter-reset: arc;
+}
+.arc li {
+  position: relative; padding: 1rem .9rem 1.05rem;
+  border: 1px solid var(--line); border-radius: var(--r);
+  background: linear-gradient(170deg, var(--bg-1), var(--bg));
+  transition: border-color .35s, transform .45s var(--ease-out), background .35s;
+}
+.arc li::after {                      /* connector between steps */
+  content: ""; position: absolute; right: -.62rem; top: 50%;
+  width: .62rem; height: 1px; background: var(--line); z-index: 1;
+}
+.arc li:last-child::after { display: none; }
+.arc li:hover { transform: translateY(-3px); border-color: color-mix(in srgb, var(--gold) 40%, var(--line)); }
+.arc-n {
+  display: block; font-family: var(--mono); font-size: .66rem;
+  letter-spacing: .12em; color: var(--gold); margin-bottom: .5rem;
+}
+.arc b { display: block; font-size: .88rem; font-weight: 620; letter-spacing: -.018em; margin-bottom: .35rem; }
+.arc small { display: block; font-size: .74rem; line-height: 1.5; color: var(--fg-3); }
+
+/* the arc lights up left-to-right once it scrolls in */
+.lifecycle.in .arc li { animation: arcIn .6s var(--ease-out) backwards; }
+.lifecycle.in .arc li:nth-child(1) { animation-delay: .05s }
+.lifecycle.in .arc li:nth-child(2) { animation-delay: .14s }
+.lifecycle.in .arc li:nth-child(3) { animation-delay: .23s }
+.lifecycle.in .arc li:nth-child(4) { animation-delay: .32s }
+.lifecycle.in .arc li:nth-child(5) { animation-delay: .41s }
+.lifecycle.in .arc li:nth-child(6) { animation-delay: .50s }
+@keyframes arcIn {
+  from { opacity: 0; transform: translateY(14px); border-color: var(--gold-dim); }
+  to   { opacity: 1; transform: none; }
+}
+
 /* ---------- work / projects ---------- */
 .work-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; }
 .work-grid > .card:first-child { grid-column: 1 / -1; }
@@ -427,6 +472,25 @@ p  { text-wrap: pretty; }
 .store svg { width: 14px; height: 14px; flex: none; }
 .store i { font-style: normal; color: var(--fg-3); font-size: .92em; }
 .store:hover i { color: var(--gold); }
+
+/* ---------- per-hospital deployment grid ---------- */
+.deploys {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(212px, 1fr));
+  gap: .55rem; margin-top: 1.35rem;
+}
+.deploy {
+  display: grid; grid-template-columns: 1fr 1fr; gap: .4rem;
+  padding: .7rem .8rem; border: 1px solid var(--line); border-radius: var(--r);
+  background: var(--bg-2); transition: border-color .3s, transform .4s var(--ease-out);
+}
+.deploy:hover { border-color: color-mix(in srgb, var(--gold) 34%, var(--line)); transform: translateY(-2px); }
+.deploy b  { grid-column: 1 / -1; font-size: .84rem; font-weight: 580; letter-spacing: -.012em; }
+.deploy em {
+  grid-column: 1 / -1; font-style: normal; margin-top: -.25rem; margin-bottom: .2rem;
+  font-family: var(--mono); font-size: .64rem; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--fg-3);
+}
+.deploy .store { padding: .3rem .5rem; font-size: .72rem; justify-content: center; gap: .35rem; }
 
 /* the "where's the code?" note */
 .src-note {
@@ -551,6 +615,127 @@ p  { text-wrap: pretty; }
 .fact { background: var(--bg); padding: 1.1rem 1.2rem; }
 .fact dt { font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; color: var(--fg-3); }
 .fact dd { margin: .35rem 0 0; font-size: .95rem; font-weight: 540; }
+
+/* ═════════ off the clock ═════════ */
+.fun-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 1.1rem; align-items: stretch;
+}
+.fun {
+  position: relative; overflow: hidden;
+  border: 1px solid var(--line); border-radius: var(--r-lg);
+  background: linear-gradient(168deg, var(--bg-1), var(--bg));
+  padding: 1.5rem;
+  transition: border-color .4s, transform .5s var(--ease-out), box-shadow .5s;
+}
+.fun:hover { border-color: color-mix(in srgb, var(--gold) 32%, var(--line)); transform: translateY(-4px); box-shadow: var(--shadow-2); }
+.fun-gym { grid-column: span 3; display: grid; grid-template-columns: auto 1fr; gap: clamp(1.2rem, 3vw, 2.4rem); align-items: center; padding: clamp(1.3rem, 3vw, 2rem); }
+.fun-tag {
+  display: inline-block; font-family: var(--mono); font-size: .66rem;
+  letter-spacing: .16em; text-transform: uppercase; color: var(--gold);
+  padding: .26rem .66rem; border: 1px solid color-mix(in srgb, var(--gold) 30%, transparent);
+  border-radius: 100px; margin-bottom: .95rem;
+}
+.fun h3 { font-size: 1.14rem; letter-spacing: -.026em; margin-bottom: .55rem; }
+.fun p { font-size: .89rem; color: var(--fg-2); line-height: 1.62; max-width: 52ch; }
+
+/* gym — two photos, the back one straightens on hover */
+.fun-photos { position: relative; width: clamp(180px, 22vw, 250px); aspect-ratio: 3/4; flex: none; }
+.fp {
+  position: absolute; inset: 0; margin: 0; border-radius: var(--r);
+  overflow: hidden; border: 1px solid var(--line); box-shadow: var(--shadow-2);
+  transition: transform .6s var(--ease-out);
+}
+.fp img { width: 100%; height: 100%; object-fit: cover; }
+.fp-1 { transform: rotate(-7deg) translateX(-9%); }
+.fp-2 { transform: rotate(5deg) translateX(9%); }
+.fun-gym:hover .fp-1 { transform: rotate(-2deg) translateX(-15%) scale(1.02); }
+.fun-gym:hover .fp-2 { transform: rotate(2deg) translateX(15%) scale(1.02); }
+
+/* a little rep counter that fills on reveal */
+.reps { display: flex; gap: .3rem; margin-top: 1.4rem; }
+.reps i {
+  width: 26px; height: 5px; border-radius: 3px; background: var(--bg-3);
+  transform-origin: left; transform: scaleX(0);
+}
+.fun-gym.in .reps i { animation: rep .5s var(--ease-out) forwards; background: var(--gold-dim); }
+.fun-gym.in .reps i:nth-child(1){animation-delay:.1s} .fun-gym.in .reps i:nth-child(2){animation-delay:.19s}
+.fun-gym.in .reps i:nth-child(3){animation-delay:.28s} .fun-gym.in .reps i:nth-child(4){animation-delay:.37s}
+.fun-gym.in .reps i:nth-child(5){animation-delay:.46s} .fun-gym.in .reps i:nth-child(6){animation-delay:.55s}
+.fun-gym.in .reps i:nth-child(7){animation-delay:.64s} .fun-gym.in .reps i:nth-child(8){animation-delay:.73s;background:var(--gold)}
+@keyframes rep { to { transform: scaleX(1); } }
+
+/* beer — fills up, foam settles, bubbles rise */
+.glass { margin-top: 1.2rem; display: flex; justify-content: center; }
+.glass svg { width: 74px; height: auto; overflow: visible; }
+.glass-outline { fill: none; stroke: var(--fg-3); stroke-width: 3; opacity: .55; }
+.beer-liquid { transform: translateY(0); }
+.fun-beer.in .beer-liquid { animation: pour 1.5s var(--ease-out) .2s forwards; }
+@keyframes pour { to { transform: translateY(-78px); } }
+.foam { fill: #fdf6e6; opacity: 0; }
+.fun-beer.in .foam { animation: foam .7s var(--ease-out) 1.4s forwards; }
+@keyframes foam { from { opacity: 0; transform: translateY(8px); } to { opacity: .92; transform: none; } }
+.bubbles circle { fill: #fff6dd; opacity: 0; }
+.fun-beer.in .bubbles circle { animation: bubble 2.6s linear 1.6s infinite; }
+.fun-beer.in .bubbles circle:nth-child(2){animation-delay:2.1s} .fun-beer.in .bubbles circle:nth-child(3){animation-delay:2.5s}
+.fun-beer.in .bubbles circle:nth-child(4){animation-delay:1.9s} .fun-beer.in .bubbles circle:nth-child(5){animation-delay:2.8s}
+@keyframes bubble {
+  0%   { opacity: 0;  transform: translateY(0) }
+  15%  { opacity: .85 }
+  100% { opacity: 0;  transform: translateY(-62px) }
+}
+
+/* motorbike — rides across, wheels spin */
+.road { position: relative; margin-top: 1.4rem; height: 62px; }
+.road-line {
+  position: absolute; left: 0; right: 0; bottom: 6px; height: 2px; border-radius: 2px;
+  background: repeating-linear-gradient(90deg, var(--line) 0 14px, transparent 14px 26px);
+}
+.bike { position: absolute; bottom: 4px; left: 0; width: 72px; color: var(--gold); }
+.fun-ride.in .bike { animation: ride 4.5s var(--ease) 0.3s infinite; }
+@keyframes ride {
+  0%   { transform: translateX(-24%); opacity: 0 }
+  12%  { opacity: 1 }
+  84%  { opacity: 1 }
+  100% { transform: translateX(340%); opacity: 0 }
+}
+.fun-ride.in .wheel { transform-box: fill-box; transform-origin: center; animation: spin .55s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg) } }
+.fun-ride:hover .road-line { background: repeating-linear-gradient(90deg, var(--gold-dim) 0 14px, transparent 14px 26px); }
+
+/* outdoors — hills parallax gently, sun drifts, birds glide */
+.hills { margin-top: 1.4rem; border-radius: var(--r); overflow: hidden; border: 1px solid var(--line-soft); }
+.hills svg { width: 100%; height: 92px; display: block; background: linear-gradient(180deg, var(--bg-2), var(--bg)); }
+.hill { transition: transform .8s var(--ease-out); }
+.hill-1 { fill: color-mix(in srgb, var(--gold) 32%, var(--bg-3)); }
+.hill-2 { fill: color-mix(in srgb, var(--jade) 24%, var(--bg-3)); }
+.hill-3 { fill: var(--bg-3); }
+.fun-outdoor:hover .hill-1 { transform: translateY(-5px) }
+.fun-outdoor:hover .hill-2 { transform: translateY(-9px) }
+.fun-outdoor:hover .hill-3 { transform: translateY(-3px) }
+.sun { fill: var(--gold); opacity: .85; }
+.fun-outdoor.in .sun { animation: rise 5s var(--ease-out) infinite alternate; }
+@keyframes rise { from { transform: translateY(6px) } to { transform: translateY(-4px) } }
+.birds { color: var(--fg-3); opacity: .7; }
+.fun-outdoor.in .birds { animation: glide 9s linear infinite; }
+@keyframes glide {
+  0%   { transform: translate(-14px, 6px); opacity: 0 }
+  20%  { opacity: .7 }
+  80%  { opacity: .7 }
+  100% { transform: translate(190px, -12px); opacity: 0 }
+}
+
+@media (max-width: 940px) {
+  .fun-grid { grid-template-columns: 1fr 1fr; }
+  .fun-gym  { grid-column: span 2; }
+}
+@media (max-width: 720px) {
+  .fun-grid { grid-template-columns: 1fr; }
+  .fun-gym  { grid-column: span 1; grid-template-columns: 1fr; justify-items: center; text-align: center; }
+  .fun-gym .fun-body { text-align: left; }
+  .arc { grid-template-columns: 1fr 1fr; }
+  .arc li::after { display: none; }
+}
 
 /* ---------- education ---------- */
 .edu-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
