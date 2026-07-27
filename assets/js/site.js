@@ -13,7 +13,7 @@
    2. github / linkedin — leave "" to hide that row in the contact list.
    ------------------------------------------------------------------------ */
 const CONFIG = {
-  formAccessKey: '',
+  formAccessKey: 'a1912018-89ec-4863-912c-2dd4907c1db1',
   github:        'https://github.com/aungzwin10',
   linkedin:      'https://www.linkedin.com/in/aungzwin10/',
 };
@@ -72,12 +72,21 @@ function onceVisible(el, fn, { threshold = 0.2, after = 2500 } = {}) {
   const nav = $('#nav'), bar = $('#progress'), links = $('#navLinks');
   if (!nav || !bar) return;          // 404.html ships without a nav bar
 
+  /* Reading scrollHeight forces a layout, and the previous line has just
+     written to one — so measuring inside the scroll handler thrashed on every
+     event. Measure when the page actually changes height instead: the
+     observer covers the initial render, the timeline and skill bars being
+     injected below, and any resize. */
+  let max = 0;
+  const measure = () => { max = document.documentElement.scrollHeight - innerHeight; };
+  new ResizeObserver(measure).observe(document.documentElement);
+
   const onScroll = () => {
     nav.toggleAttribute('data-stuck', scrollY > 12);
-    const max = document.documentElement.scrollHeight - innerHeight;
     bar.style.width = `${max > 0 ? (scrollY / max) * 100 : 0}%`;
   };
   addEventListener('scroll', onScroll, { passive: true });
+  measure();
   onScroll();
 
   $('#navToggle')?.addEventListener('click', (e) => {
@@ -162,30 +171,30 @@ const ROLES = [
     when: 'Aug 2020 — Present', role: 'Application Development Manager',
     org: 'Anzer IT Healthcare Asia',
     points: [
-      'Own 11 products in parallel — 6 mobile apps and 5 web apps — end to end.',
-      'Run the full lifecycle personally: requirement gathering and client meetings, planning and estimation, architecture, hands-on development, code review, and release management.',
-      'Still write the Spring Boot REST APIs the whole suite depends on.',
-      'Portfolio spans Hospital E-book, Nursing E-book, Patient Portal, Consent Forms, Central Registration, Patient Charges, Anzer Accounting & ERP, Management Dashboard, Accounting Dashboard and the Patient Portal admin panel.',
-      'Products deployed in 40+ hospitals across Myanmar, Cambodia, India, Pakistan and the Philippines.',
-      'Eighteen live store listings across Apple and Google Play, including seven separately branded hospital deployments of the Patient Portal — on both stores — from a single codebase.',
-      'The clinical apps ship to four platforms from one Flutter codebase — iOS, Android, Windows and macOS.',
-      'Worked fully remote throughout.',
+      'I own 11 products in parallel end to end — 6 cross-platform apps and 5 web apps.',
+      'I run the whole lifecycle myself rather than delegating it: requirements and client meetings, estimation and sequencing, architecture, hands-on development, code review, release management.',
+      'I still write the Spring Boot REST APIs the entire suite depends on — the management title did not take me off the keyboard.',
+      'What I look after: Hospital E-book, Nursing E-book, Patient Portal, Consent Forms, Central Registration, Patient Charges, Anzer Accounting & ERP, Management Dashboard, Accounting Dashboard and the Patient Portal admin panel.',
+      'Software I built is in use in 40+ hospitals across Myanmar, Cambodia, India, Pakistan and the Philippines.',
+      'I keep 18 live store listings in step across Apple and Google Play, including seven separately branded hospital deployments of the Patient Portal from a single codebase.',
+      'I took the clinical apps to four platforms from one Flutter codebase — iOS, Android, Windows and macOS.',
+      'Fully remote for the whole of it.',
     ],
   },
   {
     when: 'Jan 2020 — Aug 2020', role: 'Senior Programmer',
     org: 'Anzer IT Healthcare Asia',
     points: [
-      'Designed, built and tested the accounting and ERP web application — written in Perl on PostgreSQL.',
-      'Built the API layer for the Hospital E-book application with Spring Boot.',
+      'Designed, built and tested the accounting and ERP web application on my own — Perl on PostgreSQL.',
+      'Wrote the Spring Boot API layer for Hospital E-book from scratch. It became the flagship of the suite, and I still own it.',
     ],
   },
   {
     when: 'Dec 2017 — Jan 2020', role: 'Programmer',
     org: 'Anzer IT Healthcare Myanmar · Myanmar ISTD',
     points: [
-      'Analysis, design, testing, maintenance, implementation and on-site training for the Electronic Medical Record system used by Myanmar hospitals.',
-      'Built an Attendance Management System for the Japanese market on Spring Boot and PostgreSQL.',
+      'Analysis, design, testing, maintenance, implementation and on-site training for the Electronic Medical Record system used by Myanmar hospitals — this is where I learned to watch clinicians work instead of reading their specs.',
+      'Built an Attendance Management System for the Japanese market on Spring Boot and PostgreSQL, matching labour law exactly.',
       'Delivered an Integrated Database project spanning South-East Asia.',
     ],
   },
@@ -432,7 +441,13 @@ const LABEL = { 1: 'Fundamental', 2: 'Novice', 3: 'Intermediate', 4: 'Advanced',
   });
   cv.addEventListener('pointerleave', () => { hover = -1; draw(); });
   addEventListener('themechange', draw);
-  addEventListener('resize', () => { resize(); draw(); });
+  // one repaint per frame — a drag-resize fires dozens of times a second, and
+  // each pass re-reads every colour token off the root element
+  let redraw = 0;
+  addEventListener('resize', () => {
+    cancelAnimationFrame(redraw);
+    redraw = requestAnimationFrame(() => { resize(); draw(); });
+  });
 
   // grow the polygon out from the centre the first time it scrolls into view
   onceVisible(cv, () => {
@@ -498,37 +513,93 @@ const LABEL = { 1: 'Fundamental', 2: 'Novice', 3: 'Intermediate', 4: 'Advanced',
   const setErr = (id, msg) => { $(`[data-err="${id}"]`).textContent = msg || ''; return !msg; };
   const say = (state, msg) => { status.dataset.state = state; status.textContent = msg; };
 
+  /* Be honest about what any of this can achieve. Every check below runs in the
+     visitor's browser, so a bot that never loads the page and POSTs straight at
+     the endpoint sees none of it. What these stop is the large middle of the
+     spam distribution — headless crawlers that do drive a real browser — plus
+     double-taps and honest mistakes. The check that genuinely holds is the
+     server's, which is why `botcheck` is now forwarded instead of deleted:
+     Web3Forms rejects a filled honeypot on their side, and that one a bot
+     cannot opt out of. */
+
+  const LIMITS = { name: 80, email: 120, message: 4000 };
+  const KINDS = [...form.querySelectorAll('#f-kind option')].map((o) => o.textContent.trim());
+
+  /* Control characters have no business in a name or a mail subject — they are
+     how header injection is attempted. Newlines are legitimate in the message
+     body only, so that field keeps them and nothing else. */
+  const oneLine = (s, max) => s.replace(/[\u0000-\u001F\u007F]+/g, ' ').trim().slice(0, max);
+  const bodyText = (s, max) => s.replace(/\r\n?/g, '\n')
+    .replace(/[\u0000-\u0009\u000B-\u001F\u007F]+/g, ' ').trim().slice(0, max);
+
+  /* Per-browser throttle. Trivially cleared, and meant to be: it exists to stop
+     a stuck send button turning into forty emails, not to stop an attacker. */
+  const HOUR = 3_600_000, GAP_MS = 30_000, HOURLY_CAP = 5;
+  const readLog = () => {
+    try { return JSON.parse(localStorage.getItem('az-sent') || '[]').filter((t) => Date.now() - t < HOUR); }
+    catch { return []; }
+  };
+  const tooSoon = () => {
+    const log = readLog();
+    if (log.length >= HOURLY_CAP) return `That's ${HOURLY_CAP} messages in an hour — please email me directly instead.`;
+    if (log.length && Date.now() - Math.max(...log) < GAP_MS) return 'That was quick. Give it a few seconds and try again.';
+    return '';
+  };
+  const noteSent = () => {
+    try { localStorage.setItem('az-sent', JSON.stringify([...readLog(), Date.now()])); } catch { /* private mode */ }
+  };
+
   const validate = () => {
     const name = $('#f-name').value.trim();
     const mail = $('#f-email').value.trim();
     const msg  = $('#f-msg').value.trim();
     let ok = true;
-    ok = setErr('f-name', name.length < 2 ? 'Please tell me your name.' : '') && ok;
-    ok = setErr('f-email', /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(mail) ? '' : 'That email doesn\'t look right.') && ok;
-    ok = setErr('f-msg', msg.length < 12 ? 'A little more detail, please — at least a sentence.' : '') && ok;
+    ok = setErr('f-name', name.length < 2 ? 'Please tell me your name.'
+      : name.length > LIMITS.name ? 'That name is too long.' : '') && ok;
+    ok = setErr('f-email', !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(mail) ? 'That email doesn\'t look right.'
+      : mail.length > LIMITS.email ? 'That email is too long.' : '') && ok;
+    ok = setErr('f-msg', msg.length < 12 ? 'A little more detail, please — at least a sentence.'
+      : msg.length > LIMITS.message ? 'That message is longer than I can accept.' : '') && ok;
     return ok;
   };
   ['#f-name', '#f-email', '#f-msg'].forEach((s) =>
     $(s).addEventListener('blur', validate));
 
+  let sending = false;
+
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
+    if (sending) return;                                // re-entry guard
     if (!validate()) return say('err', 'Please fix the highlighted fields.');
 
-    // bot traps — a filled honeypot or a sub-3-second submit is not a human
-    if ($('#f-company').value || Date.now() - loadedAt < 3000) {
+    /* Bot traps. Answer as though it worked — telling a bot which check caught
+       it is free tuning advice for whoever wrote it. */
+    const trap = $('#f-company').value;
+    if (trap || Date.now() - loadedAt < 3000) {
       return say('ok', 'Thanks — message received.');   // silent drop
     }
 
-    const data = Object.fromEntries(new FormData(form));
-    delete data.botcheck;
+    const wait = tooSoon();
+    if (wait) return say('err', wait);
+
+    /* Read the fields individually rather than spreading FormData: it means a
+       field added to the DOM by a tampering script is never forwarded, and the
+       enquiry type can only ever be one of the options actually offered. */
+    const kindRaw = $('#f-kind').value.trim();
+    const kind = KINDS.includes(kindRaw) ? kindRaw : KINDS[0];
+    const name = oneLine($('#f-name').value, LIMITS.name);
+    const mail = oneLine($('#f-email').value, LIMITS.email);
+    const message = bodyText($('#f-msg').value, LIMITS.message);
 
     if (!CONFIG.formAccessKey) {                        // no key yet → mail client
-      const body = `${data.message}\n\n— ${data.name} <${data.email}>`;
-      location.href = `mailto:${email()}?subject=${encodeURIComponent('[Portfolio] ' + data.enquiry_type)}&body=${encodeURIComponent(body)}`;
+      const body = `${message}\n\n— ${name} <${mail}>`;
+      location.href = `mailto:${email()}?subject=${encodeURIComponent(`[Portfolio] ${kind}`)}`
+        + `&body=${encodeURIComponent(body)}`;
+      noteSent();
       return say('ok', 'Opening your mail app — press send there and it reaches me.');
     }
 
+    sending = true;
     btn.disabled = true;
     say('busy', 'Sending…');
     try {
@@ -537,14 +608,16 @@ const LABEL = { 1: 'Fundamental', 2: 'Novice', 3: 'Intermediate', 4: 'Advanced',
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
         body: JSON.stringify({
           access_key: CONFIG.formAccessKey,
-          subject: `[Portfolio] ${data.enquiry_type} — ${data.name}`,
-          from_name: 'aungzawwin.dev',
-          ...data,
+          subject: `[Portfolio] ${kind} — ${name}`,
+          from_name: 'aungzwin10.github.io',
+          name, email: mail, message, enquiry_type: kind,
+          botcheck: trap,      // forwarded on purpose — this is the server-side check
         }),
       });
       const json = await res.json().catch(() => ({}));
       if (res.ok && json.success) {
         form.reset();
+        noteSent();
         say('ok', 'Sent. I\'ll reply within two working days — thank you.');
       } else {
         throw new Error(json.message || 'send failed');
@@ -552,6 +625,7 @@ const LABEL = { 1: 'Fundamental', 2: 'Novice', 3: 'Intermediate', 4: 'Advanced',
     } catch {
       say('err', `Something went wrong. Please email me directly at ${email()}.`);
     } finally {
+      sending = false;
       btn.disabled = false;
     }
   });

@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /demos/
 
-Sitemap: https://aungzawwin.github.io/sitemap.xml
+Sitemap: https://aungzwin10.github.io/sitemap.xml

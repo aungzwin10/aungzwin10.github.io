@@ -23,6 +23,10 @@ jobs:
         with: { node-version: '20' }
       - name: NEWS2 scoring test
         run: node test/news2.test.mjs
+      # Guards the contact form's sanitising and its spam checks. Neither needs
+      # jsdom, so both run in CI without an npm install.
+      - name: Contact form hardening test
+        run: node test/form.mjs
 
   deploy:
     needs: test

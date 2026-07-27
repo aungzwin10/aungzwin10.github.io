@@ -1,15 +1,30 @@
 {
-  "name": "Aung Zaw Win — Healthcare Software Engineer",
+  "name": "Aung Zaw Win — Application Development Manager",
   "short_name": "Aung Zaw Win",
-  "description": "Portfolio of Aung Zaw Win — Java, Spring Boot and Flutter for clinical systems.",
+  "description": "Portfolio of Aung Zaw Win, an Application Development Manager in Mandalay, Myanmar. Eleven enterprise healthcare products owned end to end, with the Spring Boot APIs still written by hand. Java, Spring Boot, Flutter, PostgreSQL.",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
   "background_color": "#08090b",
   "theme_color": "#08090b",
   "icons": [
-    { "src": "/assets/img/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
-    { "src": "/assets/img/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
-    { "src": "/assets/img/icon-maskable.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+    {
+      "src": "/assets/img/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/img/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/img/icon-maskable.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
   ]
 }

@@ -1,6 +1,7 @@
 /* The Bug Hunt — click the line that breaks in production.
    All state is in memory. Nothing is stored, nothing is sent. */
 
+import './demo-theme.js';
 import { BUGS } from './bugs.js';
 
 const $ = (s, r = document) => r.querySelector(s);

@@ -3,6 +3,7 @@
    looks the same on every visit but has never been anywhere near a real
    record.  No network, no storage. */
 
+import './demo-theme.js';
 import { news2 } from './news2.js';
 
 const $  = (s, r = document) => r.querySelector(s);
@@ -494,5 +495,18 @@ function renderAll() {
 }
 renderTrendSeg();
 renderAll();
-addEventListener('resize', () => { drawTrend(); renderVitals(); });
-if (!reduced) setInterval(tick, 4000);
+
+/* One repaint per frame rather than one per event. This redraws the trend
+   chart and seven sparklines — eight canvases — and a drag-resize fires
+   dozens of times a second. The theme flip routes through the same path
+   because those canvases take their colours from CSS custom properties. */
+let redraw = 0;
+const schedule = (fn) => { cancelAnimationFrame(redraw); redraw = requestAnimationFrame(fn); };
+const repaint = () => { drawTrend(); renderVitals(); };
+addEventListener('resize', () => schedule(repaint));
+addEventListener('themechange', () => schedule(repaint));
+
+/* ponytail: pauses with the tab, not with the iframe scrolling out of view —
+   catching that needs a postMessage from the parent page. Worth adding only
+   if the home page ever measures heavy on a laptop battery. */
+if (!reduced) setInterval(() => { if (!document.hidden) tick(); }, 4000);

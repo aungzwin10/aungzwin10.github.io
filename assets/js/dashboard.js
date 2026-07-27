@@ -1,6 +1,8 @@
 /* Management Dashboard — interactive reconstruction.
    Deterministic synthetic data, drawn with plain canvas. No libraries. */
 
+import './demo-theme.js';
+
 const $  = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => [...r.querySelectorAll(s)];
 const css = (v) => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
@@ -281,9 +283,17 @@ function renderAll() {
 renderRangeSeg();
 renderAll();
 
-addEventListener('resize', () => { const d = dataFor(range); drawFlow(d); });
+/* One repaint per frame rather than one per event — a drag-resize fires dozens
+   of times a second. A theme flip needs the full pass: both canvases and the
+   donut key paint from the same CSS custom properties. */
+let redraw = 0;
+const schedule = (fn) => { cancelAnimationFrame(redraw); redraw = requestAnimationFrame(fn); };
+addEventListener('resize', () => schedule(() => drawFlow(dataFor(range))));
+addEventListener('themechange', () => schedule(renderAll));
 
 const clock = () => {
   $('#clock').textContent = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false });
 };
-clock(); setInterval(clock, 1000);
+clock();
+// no point repainting a clock nobody is looking at
+setInterval(() => { if (!document.hidden) clock(); }, 1000);
