@@ -718,7 +718,7 @@ p {
 
 .portrait-glow {
   position: absolute;
-  inset: -14% -10% 6%;
+  inset: -14% 0 6%;
   background: radial-gradient(ellipse at 50% 42%, color-mix(in srgb, var(--gold) 34%, transparent), transparent 66%);
   filter: blur(46px);
   z-index: -1;
@@ -3358,12 +3358,13 @@ footer {
     border-bottom: 1px solid var(--line-soft);
   }
 
-  /* Centred and capped once the grid stacks. The inset keeps its percentage
-     offset, so it stays inside the page padding rather than causing a
-     horizontal scrollbar on a narrow phone. */
   .about-photos {
     max-width: 420px;
     margin-inline: auto;
+  }
+
+  .about-plate-inset {
+    right: 0;
   }
 
   .stage iframe {
@@ -3428,6 +3429,18 @@ footer {
 }
 
 /* ---------- motion / print ---------- */
+@media (max-width: 380px) {
+
+  .nav .brand>span:not(.brand-mark) {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    white-space: nowrap;
+    clip-path: inset(50%);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
 
   *,
