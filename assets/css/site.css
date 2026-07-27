@@ -1633,18 +1633,66 @@ p {
   align-items: center;
 }
 
-.about-photo {
+/* Deliberately no `aspect-ratio` + `object-fit: cover` on either plate — the
+   old single portrait was cropped to 3:4, and forcing the desk shot into that
+   frame would slice the setup in half. Both keep their own ratio. */
+.about-photos {
+  position: relative;
+  margin: 0;
+  /* room for the inset to hang below the portrait */
+  padding-bottom: clamp(64px, 11vw, 104px);
+}
+
+.about-plate {
   border-radius: var(--r-xl);
   overflow: hidden;
   border: 1px solid var(--line);
   box-shadow: var(--shadow-2);
-  aspect-ratio: 3/4;
 }
 
-.about-photo img {
+.about-plate img {
+  display: block;
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  height: auto;
+}
+
+/* The negative offset is a percentage so it scales with the column instead of
+   punching a fixed 26px hole in the layout on a phone. It eats into the grid
+   gap on desktop, which is 32–64px, so it never collides with the copy. */
+.about-plate-inset {
+  position: absolute;
+  right: -6%;
+  bottom: 0;
+  width: 60%;
+  border: 0;
+  border-radius: var(--r-lg);
+  /* ring of page background, then a hairline — this is what separates the two
+     images without a gap, and it works in both themes because it is the page
+     colour rather than a fixed grey */
+  box-shadow:
+    0 0 0 7px var(--bg),
+    0 0 0 8px var(--line),
+    0 28px 60px -22px rgb(0 0 0 / .75);
+  transition: transform .5s var(--ease-out);
+}
+
+.about-photos:hover .about-plate-inset {
+  transform: translateY(-8px);
+}
+
+.about-cap {
+  position: absolute;
+  left: 0;
+  bottom: clamp(18px, 3.4vw, 34px);
+  padding: .5rem .8rem;
+  border: 1px solid var(--line);
+  border-left: 2px solid var(--gold);
+  border-radius: 0 var(--r) var(--r) 0;
+  background: var(--bg-2);
+  color: var(--fg-2);
+  font: 600 10px/1.3 var(--mono);
+  letter-spacing: .08em;
+  text-transform: uppercase;
 }
 
 .about-body p+p {
@@ -1959,7 +2007,6 @@ p {
 
 .fun-art svg {
   width: 100%;
-  height: 170px;
   display: block;
 }
 
@@ -2911,10 +2958,35 @@ p {
     grid-template-columns: 1fr;
     justify-items: center;
     text-align: center;
+    /* the wider clamp is for the two-column desktop layout; stacked, this card
+       should sit on exactly the same padding as its three siblings */
+    padding: 1.5rem;
   }
 
+  /* Once this stacks it should read like its three siblings: tag, heading,
+     copy, then the visuals. The photos have to come first in the DOM because
+     they occupy the left column of the desktop layout, so the reading order is
+     corrected here rather than by moving the markup.
+
+     `justify-self` matters more than it looks: the container centres its items,
+     which makes this one shrink-wrap to its widest child. `.fun p` is capped at
+     ~466px, so the whole block collapsed to that and sat centred, inset from
+     the card edge while every sibling card started at the padding. Stretching
+     it back lets the text begin where the beer and motorbike copy begins — the
+     paragraph still wraps at the same measure, it just no longer drags the tag
+     and heading inward with it. */
   .fun-gym .fun-body {
     text-align: left;
+    order: -1;
+    justify-self: stretch;
+  }
+
+  /* The 32vw width is sized against the desktop column this sits in. Stacked,
+     that leaves the pair marooned in the middle of a full-width card, so let
+     them grow to the measure instead — still capped, because these are 3:4
+     portraits and a full-bleed pair would tower over the sibling cards. */
+  .fun-photos {
+    width: min(100%, 440px);
   }
 
   .arc {
@@ -3286,8 +3358,11 @@ footer {
     border-bottom: 1px solid var(--line-soft);
   }
 
-  .about-photo {
-    max-width: 340px;
+  /* Centred and capped once the grid stacks. The inset keeps its percentage
+     offset, so it stays inside the page padding rather than causing a
+     horizontal scrollbar on a narrow phone. */
+  .about-photos {
+    max-width: 420px;
     margin-inline: auto;
   }
 

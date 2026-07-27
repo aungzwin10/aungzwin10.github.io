@@ -640,11 +640,29 @@
     <section class="rule" id="about">
       <div class="shell">
         <div class="about-grid">
-          <figure class="about-photo rv">
-            <img src="assets/img/about-portrait.webp"
-              srcset="assets/img/about-portrait.webp 860w, assets/img/about-portrait@1720.webp 1720w"
-              sizes="(max-width: 940px) 340px, 34vw" width="860" height="1146" alt="Aung Zaw Win outdoors"
-              loading="lazy" decoding="async">
+          <!-- Two shots rather than one: the person, then the desk he has worked
+               from remotely for eight years. The second is evidence for a claim
+               the copy makes a few lines further down. -->
+          <!-- One figure, two plates: him, and the desk he has worked from remotely
+               for eight years. The second breaks past the column edge on a ring of
+               page background so it reads as a deliberate inset rather than a
+               stacked photo, and the caption ties it to the "fully remote" fact
+               sitting a few lines to the right. -->
+          <figure class="about-photos rv">
+            <div class="about-plate">
+              <img src="assets/img/about-portrait.webp"
+                srcset="assets/img/about-portrait.webp 860w, assets/img/about-portrait@1086.webp 1086w"
+                sizes="(max-width: 940px) 420px, 34vw" width="860" height="1147" alt="Aung Zaw Win" loading="lazy"
+                decoding="async">
+            </div>
+            <div class="about-plate about-plate-inset">
+              <img src="assets/img/about-desk.webp"
+                srcset="assets/img/about-desk.webp 860w, assets/img/about-desk@1311.webp 1311w"
+                sizes="(max-width: 940px) 240px, 20vw" width="860" height="787"
+                alt="Aung Zaw Win's desk in Mandalay — monitor, laptop and keyboard set up for remote work"
+                loading="lazy" decoding="async">
+            </div>
+            <figcaption class="about-cap">Remote · Mandalay</figcaption>
           </figure>
 
           <div class="about-body rv">
